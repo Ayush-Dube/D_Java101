@@ -6,14 +6,27 @@ public class FizzBuzz{   //bhai class lekhna hai not static
             // HINT: Use System.out.println() to print the output
             // HINT: Remember that the order of the if-else statements matters
 
-            if(i%3==0){
+            // if(i%3==0){
+            //     System.out.println("Fizz");
+            // }
+            // else if(i%5==0){
+            //     System.out.println("Buzz");
+            // }
+            // else if(i%3==0 && i%5==0){
+            //     System.out.println("FizzBuzz");
+            // }
+            // else{
+            //     System.out.println(i);
+            // }
+
+            if(i%3==0 && i%5==0){
+                System.out.println("FizzBuzz");
+            }
+            else if(i%3==0){
                 System.out.println("Fizz");
             }
             else if(i%5==0){
                 System.out.println("Buzz");
-            }
-            else if(i%3==0 && i%5==0){
-                System.out.println("FizzBuzz");
             }
             else{
                 System.out.println(i);
