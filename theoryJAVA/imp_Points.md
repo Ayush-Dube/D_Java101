@@ -63,3 +63,46 @@
 ---
 
 
+### ⚡apr14
+
+✅ What is Method Overloading?  
+Method Overloading ek aisa feature hai jisme ek hi naam ke multiple methods banaye jaate hain, lekin:  
+
+- Unke parameters ka number alag hota hai
+
+- Ya parameters ka type alag hota hai
+
+- Ya dono alag hote hain  
+
+   → Same method name, different method signatures.  
+---
+
+✅ Rules of Method Overloading
+Method ka naam same hoga
+
+- Parameters alag honge
+
+- Number of parameters alag
+
+- Ya type alag
+
+- Ya dono alag
+
+- Return type ka koi lena dena nahi hota    
+
+📌 Return type change karne se method overloading nahi hoti
+Agar sirf return type badla, to error aayega  
+
+- Java compile time pe decide karta hai ki kaunsa method call hoga — isliye isse Compile-time Polymorphism bhi bolte hain.
+
+---
+
+✅ Practical Real-World Use Cases  
+Situation -----------------------------Method Overloading Example  
+Calculator app----------------------- add(int, int), add(double, double), add(int, int, int)  
+Logging or Message formatting-----log(String msg), log(String msg, int errorCode)    
+Banking application------------------(withdraw)	withdraw(int amount), withdraw(double amount)  
+Drawing shapes----------------------draw(int radius), draw(int length, int breadth)  
+File saving ---------------------------save(String path), save(String path, boolean overwrite)  
+
+---
