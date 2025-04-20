@@ -1,6 +1,7 @@
 package building2;
 
 import building1.*;
+//Non-Class Other package;
 
 public class RoomD{
 
@@ -11,9 +12,9 @@ public class RoomD{
          RoomA obj1 = new RoomA();
 
         obj1.resultPublic();
-        // obj1.resultDefault();
+        // obj1.resultDefault(); // will not work
         // obj.resultPrivate();
-        // obj1.resultProtected();
+        // obj1.resultProtected(); // will not work
 
         //this is a NON Class in a other package..
 

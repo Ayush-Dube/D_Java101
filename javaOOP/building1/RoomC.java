@@ -1,4 +1,6 @@
 // not class of room A , lets see how private ,protected and default will behave
+package building1;
+
 public class RoomC{
 
 

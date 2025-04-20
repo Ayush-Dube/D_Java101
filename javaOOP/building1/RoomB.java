@@ -1,3 +1,5 @@
+package building1;
+
 public class RoomB extends RoomA{
 
 
