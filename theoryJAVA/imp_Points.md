@@ -106,3 +106,12 @@ Drawing shapes----------------------draw(int radius), draw(int length, int bread
 File saving ---------------------------save(String path), save(String path, boolean overwrite)  
 
 ---
+
+
+### ⚡apr20
+
+#### I encounter some issue in running the access modifier code, have a proper folder structure for packages and make sure to complie eveything using wildcard.  
+- ` javac building1\*.java building2\*.java`
+    - declare package building1;
+    - declare package building2;
+    - then complie eveything , in order to work properly
