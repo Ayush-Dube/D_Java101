@@ -1,13 +1,19 @@
 public class Player extends Human {
     
-    // Player(String name, int age){
+    private String name;
+    private int age;
 
-    // }
+
+    public Player(String name, int age){
+        this.name=name;
+        this.age=age;
+
+    }
 
 
 
     public void does(){
-        System.out.println("Plays a game.");
+        System.out.printf("At %d , %s Plays a game.%n", age, name);
     }
     
     

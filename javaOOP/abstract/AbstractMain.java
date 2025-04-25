@@ -4,9 +4,9 @@ public class AbstractMain{
 
     public static void main(String[] args){
 
-        Player p1 = new Player();
-        Soldier s1 = new Soldier();
-        Teacher t1 = new Teacher();
+        Player p1 = new Player("Adam",23);
+        Soldier s1 = new Soldier("Teja",24);
+        Teacher t1 = new Teacher("Veer",25);
 
 
         p1.does();
