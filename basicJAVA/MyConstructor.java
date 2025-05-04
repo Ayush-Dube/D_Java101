@@ -99,3 +99,18 @@ public class MyConstructor {
     Constructor Overloading Ka Matlab:
     Constructor overloading ka matlab hai ek hi class mein multiple constructors define karna, lekin unka parameter list alag hona chahiye. Java runtime pe decide karta hai ki kaunsa constructor call karna hai, based on the arguments provided.
 */
+
+
+/*
+    Constructor Chaining
+     Using constructor chaining, you can call multiple constructors in one go without explicitly creating separate objects for each constructor. This is achieved by calling one constructor from another using the this() keyword (for the same class) or super() (for the parent class).
+
+    If constructor chaining is implemented incorrectly, it can lead to infinite recursion, causing a StackOverflowError. This happens when constructors keep calling each other in a circular manner without a proper termination point(base case).
+
+
+    """
+    
+    """
+    
+
+*/
