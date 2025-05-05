@@ -153,3 +153,34 @@
 - If constructor chaining is implemented incorrectly, it can lead to infinite recursion, causing a `StackOverflowError`. This happens when constructors keep calling each other in a circular manner without a proper termination point.
 
 
+### tryCatch    
+    
+    - package lab2;
+
+    public class ExceptionHandling1 {
+
+        public static void main(String[] args) {
+            
+            
+            System.out.println("This is before division");
+            
+            
+            
+            
+            try {
+                int dividebyZero = 50/0;
+                
+                System.out.println(dividebyZero);
+            }
+            
+            catch(Exception e){
+                System.out.println("Airthmeticexception: "+e.getMessage());
+            }
+            
+            finally {
+                System.out.println("try and catch block ran succesfully");
+            }
+
+        }
+
+    }
