@@ -184,3 +184,31 @@
         }
 
     }
+
+
+### may6
+
+    - 
+            interface MyInterface {
+            int VALUE = 10;  // public static final by default
+            void display();
+        }
+
+        class MyClass implements MyInterface {
+            public void display() {
+                System.out.println("Displaying...");
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                // Accessing constant
+                System.out.println(MyInterface.VALUE);  // ✅ no instantiation needed
+
+                // Using implementing class
+                MyInterface obj = new MyClass();  // ✅ polymorphic reference, no interface instantiation
+                obj.display();
+
+                // MyInterface obj2 = new MyInterface();  // ❌ ERROR: can't instantiate interface directly
+            }
+        }
