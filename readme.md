@@ -212,3 +212,11 @@
                 // MyInterface obj2 = new MyInterface();  // ❌ ERROR: can't instantiate interface directly
             }
         }
+
+    
+### ⚡mat7
+
+#### Servlet
+- middle layer between client and db/web application.
+- sends data back as per the request received.    
+#### works along with a web server such as apache Tomcat.
