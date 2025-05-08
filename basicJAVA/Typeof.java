@@ -10,4 +10,3 @@ public class Typeof {
         System.out.println(obj);
     }
 }
-    
