@@ -214,9 +214,14 @@
         }
 
     
-### ⚡mat7
+### ⚡may7
 
 #### Servlet
 - middle layer between client and db/web application.
 - sends data back as per the request received.    
 #### works along with a web server such as apache Tomcat.
+
+
+### ⚡may10
+
+- `String temp = text.replace(":)", "😊");`
