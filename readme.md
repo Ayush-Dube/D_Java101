@@ -225,3 +225,6 @@
 ### ⚡may10
 
 - `String temp = text.replace(":)", "😊");`
+
+### Lambda
+
