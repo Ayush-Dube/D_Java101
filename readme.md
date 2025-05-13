@@ -228,3 +228,6 @@
 
 ### Lambda
 
+### Generics<T>   
+
+- Generic means something that is not specific or fixed. In Java, Generic classes and methods are created to work with different data types and objects.
