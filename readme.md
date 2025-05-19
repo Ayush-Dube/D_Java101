@@ -231,3 +231,17 @@
 ### Generics<T>   
 
 - Generic means something that is not specific or fixed. In Java, Generic classes and methods are created to work with different data types and objects.
+
+
+### Java architecture 
+
+java architecture helps us to understan how a java code is executed .  
+JDK  
+↓  
+JRE  
+↓  
+JVM
+
+so the jdk has a complier which converts the Hello.java to  Hello.class file   
+this is called a bytecode()
+
