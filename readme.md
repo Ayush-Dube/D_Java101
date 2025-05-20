@@ -243,5 +243,42 @@ JRE
 JVM
 
 so the jdk has a complier which converts the Hello.java to  Hello.class file   
-this is called a bytecode()
+this is called a bytecode(which is different from the machineCode).
 
+👉**Syntax error** Java me **compile time** par pata lag jata hai.
+
+Jab aap apna Java code likhte hain aur usko compile karte hain (javac se), to compiler syntax errors check karta hai. Agar koi syntax error hai, to code compile nahi hota aur error message milta hai.
+
+**Short answer:**  
+> Syntax error compile time par pata lagta hai, kyunki Java compiler code ko compile karte waqt syntax check karta hai.
+
+
+🟩 Java
+Compiles to: .class (bytecode)
+
+Runs on: Any OS with JVM
+
+Platform-independent ✅
+
+🟩 Python
+Code file: .py
+
+Interpreted by: Python interpreter
+
+Runs on: Any OS with Python installed
+
+Platform-independent ✅
+
+🟩 HTML / CSS / JavaScript
+Runs in browser (not OS-dependent)
+
+Platform-independent ✅
+
+🟥 C
+Compiles to: .exe on Windows, .out on Linux
+
+Binary is OS-specific (Windows ≠ Linux)
+
+To run on another OS: Recompile the source code
+
+Not platform-independent ❌
