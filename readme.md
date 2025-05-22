@@ -282,3 +282,6 @@ Binary is OS-specific (Windows ≠ Linux)
 To run on another OS: Recompile the source code
 
 Not platform-independent ❌
+
+
+###
