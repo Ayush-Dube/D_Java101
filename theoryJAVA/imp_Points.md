@@ -115,3 +115,17 @@ File saving ---------------------------save(String path), save(String path, bool
     - declare package building1;
     - declare package building2;
     - then complie eveything , in order to work properly
+
+
+
+---
+![alt text](image.png)
+
+---
+![alt text](image-1.png)
+
+---
+![alt text](image-2.png)
+
+---
+![alt text](image-3.png)

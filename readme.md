@@ -284,4 +284,10 @@ To run on another OS: Recompile the source code
 Not platform-independent ❌
 
 
-###
+### 
+
+# After about a month I'm back at java
+
+- so this is a interesting challenge ,where u come again after a month or so and u feel/realise that u have forgotten java or anything related to coding  .
+- now the objective is 👉 How to bounce back 
+- retaine the previous flow of code and knowledge (a lesson)
