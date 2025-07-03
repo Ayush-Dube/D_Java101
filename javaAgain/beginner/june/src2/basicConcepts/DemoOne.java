@@ -126,6 +126,11 @@ public class DemoOne {
 		System.out.println("long: "+longValue2);
 		System.out.println("int: "+intValue2);
 		
+		//
+		
+		System.out.println();
+		System.out.println(Long.MAX_VALUE);
+		System.out.println(Long.toBinaryString(Long.MAX_VALUE));
 		
 		
 		
