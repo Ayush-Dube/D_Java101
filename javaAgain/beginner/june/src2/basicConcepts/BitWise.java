@@ -5,8 +5,8 @@ public class BitWise {
 	public static void main(String[] args) {
 		int a  =5 ;
 		System.out.println(Integer.toBinaryString(a));
-		System.out.println(Integer.toBinaryString(95));
-		
+		System.out.println(Integer.toBinaryString(263));
+			
 		
 		// 00000000 00000000 00000000 00000101
 		
@@ -25,6 +25,15 @@ public class BitWise {
 		
 		int b = 5 & 4 ;
 		System.out.println(b);
+		System.out.println(0 ^ 1);
+		System.out.println();
+		System.out.println(~1);
+		System.out.println();
+		System.out.println();
+
+		int x = 5; //101
+		System.out.println(x << 1);
+		System.out.println(x >> 1);
 		
 		
 		
