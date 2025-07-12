@@ -13,10 +13,13 @@ public class School {
 			Rcc(){
 				System.out.println("Construcutor of Rcc called");
 			}
+			
+			
+			void fromRCC() {
+				System.out.println("a method from RCC...");
+			}
 		}
-	}
-	
-	
+	}	
 	
 	
 	
@@ -28,6 +31,8 @@ public class School {
 		Civil cv = sch.new Civil();
 		
 		Civil.Rcc rc = cv.new Rcc();
+		
+		rc.fromRCC();
 		
 
 	}
