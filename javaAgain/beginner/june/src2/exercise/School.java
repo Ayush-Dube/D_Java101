@@ -39,7 +39,9 @@ public class School {
 
 }
 
-/*
+/*  Agar main method kisi aur class mein hota, 
+ *  tab tumhe poora qualified naam likhna padta — outer class ka bhi aur nested ka bhi, 
+ *  chahe woh non-static ho ya static.
 	Ab suppose ek alag class bana di:
 	
 			package exercise;

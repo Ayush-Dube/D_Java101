@@ -363,6 +363,8 @@ Agar tum s1.collegeName = "ABC"; likh doge:
 - s2.collegeName bhi ABC ho jayega.
 - Toh s1.collegeName se change karna allowed hai, lekin woh change sab pe apply hoga.
 
+---
+
 9. 
 <details><summary>Real world Example</summary>
 
@@ -461,7 +463,7 @@ Socho:
 ```
 </details>
 
----
+
 
 ---
 11. 
@@ -494,16 +496,11 @@ public class Main {
         System.out.println("Current total users AFTER all users: " + User.totalUsers);
     }
 }
-
 ```
-
 </details>
-
 ---
 
----
-
-12. 
+12.  
 <details>
 🔍 Tera point kya hai?
 Tu keh raha hai:
@@ -529,11 +526,205 @@ Java mein class ek hi baar load hoti hai — JVM ke andar!
 
 ---
 
+13. Stick with hyphens (-) as you are already using them. They are more SEO-friendly and widely used in web projects.
+---
+
+14. ### 👉Now observe that how the Syntax for making the instance/object changes in case of a nested static class.
+---
+
+>I hope till now we have under stood that "why static" 
+> - static class se related hota hai , object se nahi 
+> - static members ko bina object banaye, sirf class naam se access kar sakte ho.
+> - static member ki memory fixed hoti hai value nahi , we change its value again and again.
+> - static(fixed) yet flexible.
+
+**♦️🚩Now here is the catch**  
+ - even though static members ke leye object nahi banane hoty ,but 
+ - if a class is nested and also it is static , in that case in order to use that static-class we have to make an object of outer/top class 
+ 
+**`Top-level classes (the ones you write directly in a .java file) — can’t be static. they are always "public class AnyName" `**
+
+```java
+// ✅ Valid: Top-level
+public class Outer {
+    static class StaticInner { }  // OK
+    class Inner { }               // Also OK
+}
+
+// ❌ Invalid: Top-level
+static class Standalone { } // Compile error!
+
+```
+
+🔥See here 
+- a class can have a another class inside it (nested)
+    - a non static
+    - a static
+
+####  bhai saaf saaf baat hai, whether the inner class is static or non static , dono case mei outer/top class ka instance/object banyga 
+
+<!-- ![alt text](image-11.png)  -->
+<!-- ![alt text](image-12.png) -->
+<!-- ![alt text](image-13.png) -->
+
+
+👉 Java ka rule hai:
+
+>Non-static inner class ka object kabhi bhi independent nahi ban sakta.  
+Uske paas Outer ka instance hona chahiye.
 
 
 
+♦️Click to see a detailed exampleand guide
+<details>
+
+```java
+public class Company {
+    String companyName = "TechCorp";
+
+    // Static Nested Class
+    static class Department {
+        String deptName;
+
+        Department(String deptName) {
+            this.deptName = deptName;
+        }
+
+        void showDept() {
+            System.out.println("Department Name: " + deptName);
+        }
+    }
+
+    // Non-Static Inner Class
+    class Employee {
+        String empName;
+
+        Employee(String empName) {
+            this.empName = empName;
+        }
+
+        void showEmployee() {
+            System.out.println("Employee Name: " + empName);
+            System.out.println("Works at: " + companyName);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Static Nested Classes ===");
+
+        // ✅ Create multiple Departments
+        Company.Department dept1 = new Company.Department("Engineering");
+        Company.Department dept2 = new Company.Department("Marketing");
+
+        dept1.showDept();
+        dept2.showDept();
+
+        System.out.println("\n=== Non-Static Inner Classes ===");
+
+        // ✅ Create 1 Company instance
+        Company myCompany = new Company();
+
+        // ✅ Create multiple Employees under same Company
+        Company.Employee emp1 = myCompany.new Employee("Prakash");
+        Company.Employee emp2 = myCompany.new Employee("Sara");
+        Company.Employee emp3 = myCompany.new Employee("Ravi");
+
+        emp1.showEmployee();
+        emp2.showEmployee();
+        emp3.showEmployee();
+    }
+}
+
+//output 
+
+=== Static Nested Classes ===
+Department Name: Engineering
+Department Name: Marketing
+
+=== Non-Static Inner Classes ===
+Employee Name: Prakash
+Works at: TechCorp
+Employee Name: Sara
+Works at: TechCorp
+Employee Name: Ravi
+Works at: TechCorp
+```
+
+✔️ 1️⃣ Static Nested Classes — multiple Departments  
+- dept1 and dept2 don’t need any Company object.  
+- They’re completely separate.  
+- Example: Multiple Departments can exist even without creating a Company instance.
+
+✔️ 2️⃣ Non-Static Inner Classes — multiple Employees  
+- Only one Company object (myCompany) is created.  
+- All Employee objects are tied to that one Company instance.  
+- So all Employee objects can access companyName. 
+
+---
+emp mei constructor ke through dept ko send karo 
+![alt text](image-14.png)
+
+```java
+public class Company {
+    String companyName = "TechCorp";
+
+    // Static Nested Class
+    static class Department {
+        String deptName;
+
+        Department(String deptName) {
+            this.deptName = deptName;
+        }
+
+        void showDept() {
+            System.out.println("Department Name: " + deptName);
+        }
+    }
+
+    // Non-Static Inner Class
+    class Employee {
+        String empName;
+        Department dept;  // link to department
+
+        Employee(String empName, Department dept) {
+            this.empName = empName;
+            this.dept = dept;
+        }
+
+        void showEmployee() {
+            System.out.println("Employee Name: " + empName);
+            System.out.println("Department: " + dept.deptName);
+            System.out.println("Works at: " + companyName);
+        }
+    }
+
+    public static void main(String[] args) {
+        // Static nested class objects — Departments
+        Department eng = new Department("Engineering");
+        Department mkt = new Department("Marketing");
+
+        eng.showDept();
+        mkt.showDept();
+
+        // Non-static inner class objects — Employees
+        Company myCompany = new Company();
+
+        Company.Employee emp1 = myCompany.new Employee("Prakash", eng);
+        Company.Employee emp2 = myCompany.new Employee("Sara", mkt);
+        Company.Employee emp3 = myCompany.new Employee("Ravi", eng);
+
+        emp1.showEmployee();
+        emp2.showEmployee();
+        emp3.showEmployee();
+    }
+}
+```
 
 
+</details>
+<br>
+
+# 🔥Method Chaining 🔗🔗🔗
 
 
 
