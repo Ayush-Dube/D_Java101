@@ -722,9 +722,16 @@ public class Company {
 
 
 </details>
+</details>
 <br>
 
 # 🔥Method Chaining 🔗🔗🔗
+
+This design or way of writing a function is helpful when you are making a object with lot of parametrs and they can get confusing .Also in the process u might miss the sequence of passing a parameter, and may encounter a error.
+
+Method Chaining is most evident in Builer pattern/method.
+
+
 
 
 
