@@ -46,3 +46,63 @@ public class User {
 		}		
 
 }
+
+/*
+ * 		User u  = new Builder() --> Builder class ka object create hota hai,hidden construtor of Builder cls runs, 0A2xb7 reference created
+ *					  .setName("Dube") --> setName call hota hai ,  value set hoti hai  , phir se reference return ho jata hai
+ *					  .setAge(21)  --> usi object ka setAge method called, value set, return the reference
+ *                    .build() --> reference is passed as a parameter to convert the Builder object into User object.
+ *                    
+ *                    
+ *      Now ,also observe this
+ *      
+ *      return new User(this) --> yanha hum ek reference pass kr rahe hain , 
+ *      						  ek builder object already bn gya tha , bs uska hi refernce hai...
+ *      							
+ *      						  - observe ki User aur Builder both have same variable names 
+ *      						  - there fore they change using this.name=obj.name;this.age=obj.age
+ *       _______________________
+ *      |Pass by value/reference|
+ *       
+ *       
+ *		- primitive vs nonPrimitive datatype 
+ *      - primmitive mei simple values hoti hain jo directly pass ho jati hai , pr nonPrimitive complex dataTypes hoty hain,
+ *      - which carries wide range of info/data.
+ *      - therefore thry are passed as reference.
+ *      
+ *      //case1
+ *      int a = 5 ;
+ *      A obj = new A(a);
+ *      
+ *      A(int a){}
+ *      No reference is passed , the actual values are passed.
+ *      
+ *      
+ *      //case2
+ *      Student s = new Student("praka",29);
+ *      - now imagine s in an object that info inside 's', s.name,s,age
+ *      - some other method or class that may require s as an input
+ *      - X ins = new X(s);
+ *                - in this case "s" ka reference is passed
+ *                
+ *      String s = "hello";
+ *      new A(s); --> s ka reference pass hota hai , bcoz s is nonPrimmitive
+ *      
+ *      
+ *      //return new User(this) mei Builder object reference pass ho raha hai
+ *                - and User(Builder xyz){ }
+ *                  means that it is expecting a Builder class object(reference) only
+ *     
+ *        
+ *        
+ *        
+ *            
+ *      
+ *      
+ *      
+ *      
+ * 
+ * 
+ * 
+ * 
+ */

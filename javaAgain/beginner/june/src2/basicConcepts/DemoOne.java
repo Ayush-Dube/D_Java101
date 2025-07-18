@@ -3,11 +3,7 @@ package basicConcepts;
 public class DemoOne {
 
 	public static void main(String[] args) {
-		
-		
-		
-		
-		
+				
 		int age = 30;
 //		byte age1 = 200;
 		short age2 = 500;

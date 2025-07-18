@@ -41,19 +41,9 @@ package methodChaining;
 		 
 		 Tou kya kare?
 		 
-		 Just write the empty constructor as well,in this way u can operate the class in both ways.
-		 
-		 
-		 
-		 
+		 Just write the empty constructor as well,in this way u can operate the class in both ways.	 
 		 
 	 */
-	 
-	 
-	 
-
-
-
 // no nested class
 public class Player {
 	String name;
@@ -114,6 +104,5 @@ public class Player {
 		System.out.println();
 		return this;		
 	}
-	
 	
 }

@@ -731,6 +731,193 @@ This design or way of writing a function is helpful when you are making a object
 
 Method Chaining is most evident in Builer pattern/method.
 
+<details><summary>Click 4 moreDetails</summary>
+
+### 1. Three Versions 
+    
+1. Constructor-only
+    - sari values object banaty time hi deni hoti hai , correct sequence mei
+    - code mei setMethods nahi hai , no return values
+    - method-chaining nahi hogi ❌❌
+
+```java
+public class Player {
+    private String name;
+    private int age;
+    private String gender;
+    private String weapon;
+    private String unit;
+    private String service;
+    private int score;
+
+    // Constructor Only
+    public Player(String name, int age, String gender, String weapon, String unit, String service, int score) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.weapon = weapon;
+        this.unit = unit;
+        this.service = service;
+        this.score = score;
+    }
+
+    public void printSummary() {
+        System.out.println("Player: " + name + " (" + gender + ", " + age + ")");
+        System.out.println("Unit: " + unit + ", Service: " + service);
+        System.out.println("Weapon: " + weapon + ", Score: " + score);
+    }
+}
+
+Player p = new Player("Praka",29,"male"...)
+```
+
+2. Method-Chainig (No explicit construcutr written)
+```java
+public class Player {
+    private String name;
+    private int age;
+    private String gender;
+    private String weapon;
+    private String unit;
+    private String service;
+    private int score;
+
+    // Default constructor
+    public Player() {}
+
+    public Player setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Player setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public Player setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public Player setWeapon(String weapon) {
+        this.weapon = weapon;
+        return this;
+    }
+
+    public Player setUnit(String unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    public Player setService(String service) {
+        this.service = service;
+        return this;
+    }
+
+    public Player setScore(int score) {
+        this.score = score;
+        return this;
+    }
+
+    public Player printSummary() {
+        System.out.println("Player: " + name + " (" + gender + ", " + age + ")");
+        System.out.println("Unit: " + unit + ", Service: " + service);
+        System.out.println("Weapon: " + weapon + ", Score: " + score);
+        return this;
+    }
+}
+
+new Player()
+    .setName("Arjun")
+    .setAge(25)
+    .setGender("Male")
+    .setWeapon("Sniper")
+    .setUnit("Alpha")
+    .setService("Stealth Ops")
+    .setScore(8700)
+    .printSummary();
+```
+3. Constructor + MethodChaining(Best of both)
+```java
+public class Player {
+    private String name;
+    private int age;
+    private String gender;
+    private String weapon;
+    private String unit;
+    private String service;
+    private int score;
+
+    // Full constructor
+    public Player(String name, int age, String gender, String weapon, String unit, String service, int score) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.weapon = weapon;
+        this.unit = unit;
+        this.service = service;
+        this.score = score;
+    }
+
+    // Default constructor (for chaining)
+    public Player() {}
+
+    public Player setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Player setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public Player setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public Player setWeapon(String weapon) {
+        this.weapon = weapon;
+        return this;
+    }
+
+    public Player setUnit(String unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    public Player setService(String service) {
+        this.service = service;
+        return this;
+    }
+
+    public Player setScore(int score) {
+        this.score = score;
+        return this;
+    }
+
+    public Player printSummary() {
+        System.out.println("Player: " + name + " (" + gender + ", " + age + ")");
+        System.out.println("Unit: " + unit + ", Service: " + service);
+        System.out.println("Weapon: " + weapon + ", Score: " + score);
+        return this;
+    }
+}
+
+//now an instance can be createdd using either of the methods.
+```
+<br>
+<br>
+<br>
+
+![alt text](image-15.png)
+
+</details>
+
+
+
 
 
 
