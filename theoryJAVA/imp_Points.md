@@ -915,6 +915,33 @@ public class Player {
 ![alt text](image-15.png)
 
 </details>
+<br> 
+<br> 
+
+# ⚡Constructor Designing
+
+>`“Beforehand we must know how many parameters we will use for an object, and accordingly design our constructor.”`
+
+# Core of Java 
+
+in java   
+- classes are like datatype.Blueprint to make items/objects/instances.
+- Suppose u have different students who have there own individual name,branch,sem.  
+    - at the same time all students of a particular college will have same Collegename and Principal name 
+
+- so make a tamplate called Student which can process/keep student parameters using constructor. Also based on the paramemters provided it can perform function(method) on it and return u a result.
+- where as this template can have certian fixed value of its own which is constant(yet) changable through out.(static)
+- so the data Members which are different for each memebers are called INSTANCE LEVEL VARIABLES/METHODS.
+- and datamembers which are fixed in the template are called CLASS LEVEL MEMBERS. and they are called by using the class reference  `class.datamember` -->Student.Principal 
+    - Student is the class and Principal is the static datamember.
+    - these are made by using the keyword `static` in front of the datamemeber
+    - which u think will be same for the template through out ,and hence the will be utilised by each object that is created.
+
+>`this` points towards the instance level dataMember .   
+     - we use this internally for our instance level/object level datamembers.
+
+>recall the datatype String .  
+
 
 
 

@@ -26,6 +26,10 @@ public class FoundationMain {
         System.out.println("--- Personal Mentor ---");
         mentor.showMentor();
 		
+        
+        
+        System.out.println();
+        System.out.println(Student.teacherList);
 
 	}
 
