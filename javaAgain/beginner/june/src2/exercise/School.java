@@ -30,7 +30,7 @@ public class School {
 		
 		Civil cv = sch.new Civil();
 		
-		Civil.Rcc rc = cv.new Rcc();
+		School.Civil.Rcc rc = cv.new Rcc();
 		
 		rc.fromRCC();
 		

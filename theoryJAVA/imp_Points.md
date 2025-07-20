@@ -940,12 +940,46 @@ in java
 >`this` points towards the instance level dataMember .   
      - we use this internally for our instance level/object level datamembers.
 
->recall the datatype String .  
+>recall the datatype String.  
+
+## more Java
+
+### Variable agar class ke andar ho
+
+![alt text](image-16.png)
+
+🔑 Isko JVM kahan store karti hai?  
+
+|Type|Storage|
+|:---|---:|
+|Instance Variable|Heap Memory — Jab object banta hai tab allocate hota hai|
+|Static Variable|Method Area / Class Area — Class load hote hi allocate ho jata hai (har object mein copy nahi hoti)|
+<br>
+	
+
+✅ Default values milti hain:    
+Reference: null    
+Primitive: 0, 0.0, false, '\u0000' for char  
+
+### Variable agar method ke andar ho  
+
+ then it local variable   
+![alt text](image-17.png)
 
 
+🔥
+![alt text](image-18.png)
 
 
+|type||name|
+|:---|---|--:|
+|inside class - Static||Class variables|
+|inside class -nonstatic||instance variables|
+|inside method||local variables|
 
+>Agar nested classes aur unke members static hain, toh `chahe kitni bhi nested classes` hoon — direct `class chain` se access ho jayega, `bina kisi object banaye`.  
 
+⏬⏬⏬⏬⏬
+![alt text](image-19.png)
 
 
