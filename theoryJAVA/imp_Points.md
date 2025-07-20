@@ -982,4 +982,66 @@ Primitive: 0, 0.0, false, '\u0000' for char
 ⏬⏬⏬⏬⏬
 ![alt text](image-19.png)
 
+<br>
+❌ Kab jarurat padegi?    
+
+- Agar nested class ya uske members non-static hain, toh:
+
+    - Outer class ka ya nested class ka object banana hi padega.
+
+    - Kyunki non-static cheez kisi object se bind hoti hai.
+
+Conclusion  
+- static → bina instance ke chalega
+
+- non-static (instance) → object banana hi padega
+
+
+## 1. 
+```java
+class UpperA {
+    static class MiddleClass {
+        static void showDetails() {
+            System.out.println("This is a static method inside MiddleClass.");
+        }
+    }
+}
+```
+
+
+
+## 1. 
+
+🚫 Object kab banana padega?  
+Agar showDetails() non-static hota:  
+```java
+class UpperA{
+    static class MiddleClass {̥
+    void showDetails() {   // ❌ Non-static
+        System.out.println("Non-static method.");
+    }
+}
+}
+```
+Toh tumhe pehle MiddleClass ka object banana padta:  
+```java
+UpperA.MiddleClass m = new UpperA.MiddleClass();
+m.showDetails();
+```
+
+## 2.
+```java
+class UpperA {
+     class MiddleClass { 
+        static void showDetails() {
+            System.out.println("This is a static method inside MiddleClass.");
+        }
+    }
+}
+```
+- the above code is not allowed in java  
+    - Make MiddleClass static, or  
+    - Remove the static keyword from the method.
+
+
 
