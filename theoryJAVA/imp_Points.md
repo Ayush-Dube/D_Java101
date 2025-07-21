@@ -133,7 +133,8 @@ File saving ---------------------------save(String path), save(String path, bool
 ---
 ### After learning md , now observe the note quality
 --- 
-## 🦾Static Class,still object making , java depth🔥 
+
+# ⚡Static Class,still object making , java depth🔥 
 <details>
 
 ```java
@@ -603,6 +604,7 @@ public class Company {
             this.empName = empName;
         }
 
+
         void showEmployee() {
             System.out.println("Employee Name: " + empName);
             System.out.println("Works at: " + companyName);
@@ -918,11 +920,7 @@ public class Player {
 <br> 
 <br> 
 
-# ⚡Constructor Designing
-
->`“Beforehand we must know how many parameters we will use for an object, and accordingly design our constructor.”`
-
-# Core of Java 
+# ⚡Core of Java 
 <details>
 
 in java   
@@ -947,6 +945,7 @@ in java
 
 ### Variable agar class ke andar ho
 
+<details>
 ![alt text](image-16.png)
 
 🔑 Isko JVM kahan store karti hai?  
@@ -1057,4 +1056,233 @@ class UpperA {
 ## 5. 
 
 
+</details>
+<br>
+
+# ⚡Constructor Designing
+
+>`“Beforehand we must know how many parameters we will use for an object, and accordingly design our constructor.”`
+
+<details>
+
+1. default construcutor
+```java
+public class Student {
+    String name;
+    String branch;
+    int sem;
+
+    // Default Constructor
+    public Student() { 
+    // Java khud default constructor provide karta hai
+    // Isme koi parameters nahi hote, aur yeh blank values ko initialize karta hai such as null and 0.
+    // hidden not written usually,u can write it too, if u want to have a mixed Construcutor
+    }
+}
+
+```
+Default constructor: "Student banao — par main kuch nahi bata raha ki iska naam kya hai."
+Java bolega: "Theek hai, naam null, branch null, sem 0."    
+👇👇👇    
+![alt text](image-20.png)
+
+--- 
+
+2. paramemterized construcutor
+```java
+public class Student {
+    String name;
+    String branch;
+    int sem;
+
+    // Parameterized Constructor
+    public Student(String name, String branch, int sem) {
+        this.name = name;
+        this.branch = branch;
+        this.sem = sem;
+        // 'this' keyword class ke variables ko indicate karne ke liye hota hai
+    }
+}
+
+```
+
+3. only default construcutor but u are passing paramemters    
+<br>
+![alt text](image-22.png)
+
+👉 Result:  
+
+💥 Compilation Error!  
+
+Error:  
+>constructor Student in class Student cannot be applied to given types;
+required: no arguments
+found: String, String, int
+reason: actual and formal argument lists differ in length
+
+👉 Kyun?  
+
+- Java ke paas Student() wala constructor hai jo koi argument nahi leta.
+
+- Tum new Student("kallua", "ortho", 5) de rahe ho, jo teen argument de raha hai.
+
+- Java ke liye matching constructor nahi mil raha.
+
+👉 Important baat:  
+
+- Agar tum koi bhi constructor define nahi karte ho, toh Java default constructor de deta hai.
+
+- Agar tum koi ek bhi constructor bana dete ho (parameterized), toh Java khud default constructor nahi deta.  
+
+>Matlab agar tumne Student(String name, String branch, int sem) banaya aur Student() nahi banaya, toh ab new Student() se bhi error aayega.  
+  
+
+🔻Case 1:  
+Maan lo tum chahte ho ki har student ka naam aur branch jaroori hai, lekin sem optional hai:
+```java
+public class Student {
+    String name;
+    String branch;
+    int sem;
+
+    public Student(String name, String branch) {
+        this.name = name;
+        this.branch = branch;
+        this.sem = 1;  // default semester
+    }
+}
+
+Student s1 = new Student("Kallua", "Ortho");
+
+```
+
+🔻Case 2:  
+Tum multiple constructors bhi bana sakte ho (constructor overloading).
+```java
+public class Student {
+    String name;
+    String branch;
+    int sem;
+
+    // Constructor 1
+    public Student() {
+        this.name = "Unknown";
+        this.branch = "Not Assigned";
+        this.sem = 1;
+    }
+
+    // Constructor 2
+    public Student(String name, String branch, int sem) {
+        this.name = name;
+        this.branch = branch;
+        this.sem = sem;
+    }
+}
+
+```
+
+>if u make a construcutor in a class by urself then the default constructor will not work.
+```java
+class Student {
+    String name;
+    // Custom constructor
+    Student(String name) {
+        this.name = name;
+    }
+}
+
+// Ab yeh allowed nahi hai:
+// Student s = new Student(); // ❌ Error: no default constructor
+```
+
+</details>
+
+<br>
+
+# ⚡class , instance , static , non-static
+
+<details>
+
+### 1.
+- Java mein class matlab ek template ya blueprint.  
+- Jaise int ya String datatype hai, waise Student bhi tumhara custom datatype hai.
+
+```java
+public class Student {
+    String name;           // instance
+    int age;               // instance
+    static String college = "IIT";  // static
+
+    void details() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("College: " + college);
+    }
+}
+
+Student s1 = new Student();
+Student s2 = new Student();
+
+s1.name = "Ram";
+s2.name = "Shyam";
+
+Student.college = "NIT";  // Static variable updated
+
+```
+>but baar baar objects ke variable set krna time consuming hai , to automate this we use `Constructor`
+so that we dont have to do it repeatdly.
+
+### 2. 
+- Jab tum kisi variable ko static bana dete ho, woh class data member ban jata hai — yaani sab objects ke liye common ho jata hai.
+
+||||
+|:---|---:|---:|  
+|static|class level|  Static (class-level) variable/method ➜ ClassName.variable ya ClassName.method()|
+|bina static|instance level|  Instance (object) variable/method ➜ obj.variable ya obj.method()
+
+<br>  
+
+"Agar koi method class ke andar hai aur woh `dono (instance + class) variables/methods` ko use kar raha hai, toh main yeh follow karunga:
+- Instance ke liye: this.variable ya this.method()  
+- Static ke liye: ClassName.variable ya ClassName.method()
+
+<br>
+
+## 3. sameName
+```java
+class A {
+    static String name = "default name"; // static variable
+    String name;                         // instance variable
+
+    A(String name) {
+        this.name = name;  // yeh instance variable ko set karega
+    }
+
+    void showName() {
+        System.out.println("Instance name: " + this.name);
+    }
+
+    void showStaticName() {
+        System.out.println("Static name: " + A.name);
+    }
+}
+
+```
+
+⚡ Kyun dikkat nahi hoti?  
+1️⃣ Scope clear hota hai:  
+
+- this.name → instance variable (object specific)
+
+- A.name → static variable (class level, shared)
+
+Java compiler ye this aur ClassName se differentiate kar leta hai.   
+
+
+
+## 4. Java mein default value kaise dena chahiye?  
+
+✅ Method A: Multiple Constructors (Constructor Overloading)  
+✅ Method B: Field Initialization  
+✅ Method C: Builder Pattern (Advanced)
 </details>
