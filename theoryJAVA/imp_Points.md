@@ -133,8 +133,8 @@ File saving ---------------------------save(String path), save(String path, bool
 ---
 ### After learning md , now observe the note quality
 --- 
-
-<details><summary> Static Class,still object making </summary> 
+## 🦾Static Class,still object making , java depth🔥 
+<details>
 
 ```java
     package basicConcepts;
@@ -923,6 +923,7 @@ public class Player {
 >`“Beforehand we must know how many parameters we will use for an object, and accordingly design our constructor.”`
 
 # Core of Java 
+<details>
 
 in java   
 - classes are like datatype.Blueprint to make items/objects/instances.
@@ -1010,7 +1011,7 @@ class UpperA {
 
 
 
-## 1. 
+## 2. 
 
 🚫 Object kab banana padega?  
 Agar showDetails() non-static hota:  
@@ -1029,7 +1030,7 @@ UpperA.MiddleClass m = new UpperA.MiddleClass();
 m.showDetails();
 ```
 
-## 2.
+## 3.
 ```java
 class UpperA {
      class MiddleClass { 
@@ -1045,3 +1046,15 @@ class UpperA {
 
 
 
+## 4. 
+<div align="center">
+    <img src="image-21.png" width="350px">  
+
+    ---okayy---
+    can center this way too!!!
+</div>
+
+## 5. 
+
+
+</details>
