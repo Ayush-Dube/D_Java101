@@ -724,6 +724,7 @@ public class Company {
 
 
 </details>
+
 </details>
 <br>
 
@@ -917,6 +918,7 @@ public class Player {
 ![alt text](image-15.png)
 
 </details>
+
 <br> 
 <br> 
 
@@ -941,7 +943,7 @@ in java
 
 >recall the datatype String.  
 
-## more Java
+## ⚡more Java
 
 ### Variable agar class ke andar ho
 
@@ -1055,8 +1057,11 @@ class UpperA {
 
 ## 5. 
 
-
 </details>
+</details>
+
+
+
 <br>
 
 # ⚡Constructor Designing
@@ -1248,7 +1253,7 @@ so that we dont have to do it repeatdly.
 
 <br>
 
-## 3. sameName
+## 3. 🔶sameName
 ```java
 class A {
     static String name = "default name"; // static variable
@@ -1278,6 +1283,20 @@ class A {
 
 Java compiler ye this aur ClassName se differentiate kar leta hai.   
 
+👎❌❌❌❌❌❌ new update , hui **dikkat hui**
+
+![alt text](image-23.png)
+<br>
+
+You're absolutely correct that technically:  
+
+- A.sameName lives in the class/static memory area
+
+- this.sameName lives in heap memory with the object instance
+
+>`But Java prioritizes code safety over this theoretical possibility by enforcing naming uniqueness at the class level`.
+
+
 
 
 ## 4. Java mein default value kaise dena chahiye?  
@@ -1286,3 +1305,99 @@ Java compiler ye this aur ClassName se differentiate kar leta hai.
 ✅ Method B: Field Initialization  
 ✅ Method C: Builder Pattern (Advanced)
 </details>
+
+
+# ⚡ String  pool
+
+- `String` is a special class in java 
+
+<details>
+
+jvm has a meomry area called the `string constant pool`,
+```java
+String name = "Doga";
+```
+java will chk if this name is available in pool
+- if present it will use the the existing object.
+- if not it will create new object in pool.
+
+now,
+```java
+String name = new String("Doga");
+```
+- jvm will forcibly make a neww object in `heap` memory even if `Doga` exits already in pool.
+- this is called `Explicit object creation`.
+
+<div align="center">
+
+|Statement|⁉️|Meomry|Performance|
+|:---|:---:|:---:|---:|
+|`String name="Praka;"`|string literal|String Constant Pool|Fast,Efficient|
+|`String name = new String("Praka")`|Explicit object creation|Heap|Slower,moreMeory|
+|`Strudent s1 = new Student("Praka")`|ur custom class|Heap|Normal|
+
+</div> 
+
+
+#### 🔸Deep Dive   
+```java
+String a ="Hello";
+String b ="Hello";
+System.out.println(a==b); //true bcoz same object in pool
+
+String c = new String("Hello");
+System.out.println(a==c); //false  bcoz c is in heap
+
+```
+
+</details> 
+
+
+==`javascript`== 
+- Closures: Functions that remember their lexical scope, even when called outside it.
+- Asynchronous Programming: Callbacks, Promises, async/await, and event loop.
+- Prototypes & Inheritance: Prototype chain, constructor functions, Object.create, and ES6 classes.
+- This Keyword: Dynamic context, arrow functions vs regular functions, binding.
+- Event Delegation: Efficient event handling in the DOM.
+- Modules: ES6 modules (import/export), CommonJS, module bundlers.
+- Functional Programming Concepts: Higher-order functions, immutability, pure functions.
+- Error Handling: Try/catch, custom errors, promise rejection.
+- prototype-based objects, first-class functions, and asynchronous programming 
+
+
+## ⚡more on sameName issue
+
+- runtime and compile time 
+
+🔑 Your logic is correct about memory  
+- static variable → belongs to the class, one copy per class, stored in Method Area (in JVM).
+
+- instance variable → belongs to the object, one copy per object, stored in Heap.
+
+So in memory:
+```java
+ClassA.staticName → Method Area
+ClassA obj → Heap
+obj.name → Heap
+//They really do not overlap in memory. ✅
+```
+>this is a compile time issue not a run time issue .
+even before the logic of java is processed, the compiler will reject the code on the basis of syntax.
+
+```java
+class Car {
+    static String color = "White"; // default for all cars
+    String color; // instance color
+
+    Car(String color) {
+        this.color = color; // sets instance color
+    }
+}
+//This is illegal in Java.  
+// Same reason: duplicate field color — even though your logic about memory is fine!
+```
+`type nul > Car.java ` for windows.  
+ In PowerShell, use this to create an empty file:
+- New-Item -ItemType File -Name Car.java
+
+
