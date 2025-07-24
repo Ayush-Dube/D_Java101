@@ -1352,7 +1352,7 @@ System.out.println(a==c); //false  bcoz c is in heap
 
 </details> 
 
-
+<!-- 
 ==`javascript`== 
 - Closures: Functions that remember their lexical scope, even when called outside it.
 - Asynchronous Programming: Callbacks, Promises, async/await, and event loop.
@@ -1362,7 +1362,7 @@ System.out.println(a==c); //false  bcoz c is in heap
 - Modules: ES6 modules (import/export), CommonJS, module bundlers.
 - Functional Programming Concepts: Higher-order functions, immutability, pure functions.
 - Error Handling: Try/catch, custom errors, promise rejection.
-- prototype-based objects, first-class functions, and asynchronous programming 
+- prototype-based objects, first-class functions, and asynchronous programming  -->
 
 <br>
 
