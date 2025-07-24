@@ -1364,8 +1364,9 @@ System.out.println(a==c); //false  bcoz c is in heap
 - Error Handling: Try/catch, custom errors, promise rejection.
 - prototype-based objects, first-class functions, and asynchronous programming 
 
+<br>
 
-## ⚡more on sameName issue
+# ⚡more on sameName issue
 
 - runtime and compile time 
 
@@ -1401,3 +1402,63 @@ class Car {
 - New-Item -ItemType File -Name Car.java
 
 
+>using `try-catch block` to address this issue will also fail.
+- because 
+    - try-catch block only handles runtime error.
+    - Complier will reject the code on the basis of duplicate variable and not even produce the .class file 
+    
+### WorkAround
+- use static final 
+```java
+class Car {
+    static final String DEFAULT_COLOR = "White"; // constant for all cars
+
+    String color;
+
+    Car() {
+        this.color = DEFAULT_COLOR; // uses default
+    }
+
+    Car(String color) {
+        this.color = color; // uses given color
+    }
+
+    void show() {
+        System.out.println("Car color: " + this.color);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car1 = new Car();
+        Car car2 = new Car("Red");
+
+        car1.show(); // Car color: White
+        car2.show(); // Car color: Red
+    }
+}
+
+```
+✔️ Key points  
+DEFAULT_COLOR is shared — all cars know what the default is.
+- If you don’t pass a color → the constructor uses the default.
+- If you pass a color → you override the default.
+
+⚡ Benefits  
+Clear default value for all cars.      
+- You can’t accidentally change the default — final prevents it.
+- No name conflict → DEFAULT_COLOR and color are different.
+
+### Runtime vs Compile time
+>🔑Key point  
+🔸try-catch works only for runtime errors (like division by zero, null pointer, file not found).  
+🔸Compiler errors happen before the program runs — so the compiler never even creates a .class file for the JVM to run.
+
+❌ But compiler errors can’t be caught  
+```java
+class A {
+  String name;
+  static String name; // ❌ Compile-time error → Duplicate field
+}
+```
+➡️ Compiler won’t even generate the .class file → no chance to run try-catch.
