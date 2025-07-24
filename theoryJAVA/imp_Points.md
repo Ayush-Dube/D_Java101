@@ -1368,8 +1368,9 @@ System.out.println(a==c); //false  bcoz c is in heap
 
 # ⚡more on sameName issue
 
-- runtime and compile time 
-
+- runtime and compile time   
+<details>   
+ 
 🔑 Your logic is correct about memory  
 - static variable → belongs to the class, one copy per class, stored in Method Area (in JVM).
 
@@ -1407,7 +1408,7 @@ class Car {
     - try-catch block only handles runtime error.
     - Complier will reject the code on the basis of duplicate variable and not even produce the .class file 
     
-### WorkAround
+### 💥WorkAround💥
 - use static final 
 ```java
 class Car {
@@ -1439,7 +1440,8 @@ public class Main {
 }
 
 ```
-✔️ Key points  
+✔️ Key points    
+
 DEFAULT_COLOR is shared — all cars know what the default is.
 - If you don’t pass a color → the constructor uses the default.
 - If you pass a color → you override the default.
@@ -1462,3 +1464,11 @@ class A {
 }
 ```
 ➡️ Compiler won’t even generate the .class file → no chance to run try-catch.
+
+</details>
+
+# ⚡Scanner Class
+<!-- july24 -->
+- why scn.close();
+- classcic scanner problem;
+- no cursor indicatior .

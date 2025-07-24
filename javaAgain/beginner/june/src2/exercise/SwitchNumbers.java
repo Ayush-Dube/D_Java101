@@ -1,5 +1,5 @@
 package exercise;
-
+//july24
 import java.util.Scanner;
 
 public class SwitchNumbers {
@@ -15,6 +15,8 @@ public class SwitchNumbers {
 			
 			//scn.close() ko last mei ek baar hi dena hai,
 			//if you can out it in a finally block ,it will run always no clutter for later.
+			
+			//👉switch case can not be used with double ,float
 			
 			switch (x){
 			case 1:
@@ -64,7 +66,7 @@ public class SwitchNumbers {
 			System.out.println("there was a runtime problem:- "+e);
 		}
 		finally {
-			scn.close();
+			scn.close(); //what problem does it actually creates
 		}
 		
 	}
