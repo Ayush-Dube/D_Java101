@@ -1471,4 +1471,4 @@ class A {
 <!-- july24 -->
 - why scn.close();
 - classcic scanner problem;
-- no cursor indicatior .
+- no cursor indicatior.
