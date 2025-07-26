@@ -73,9 +73,28 @@ public class LoopMain {
 //			}
 //		}
 		
+		
 		for(int i = 1,j = 1;j<=100000;j=j*10){
 		  System.out.println(i*j);	
 		}
+		
+		System.out.println();
+		System.out.println("example_1");
+		System.out.println("================");
+		
+		for(int i=0;i<=5;++i){
+//			System.out.println(i*"*");
+			for(int j =1;j<=i;j++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+		for(int i =1;i<=5;i++) {
+			System.out.println("*".repeat(i));
+		}
+		
+
 	}		
 		
 		
