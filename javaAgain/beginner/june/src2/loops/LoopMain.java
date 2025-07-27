@@ -4,6 +4,19 @@ public class LoopMain {
 
 	public static void main(String[] args) {
 		
+		Loop lp = new Loop();
+		lp.loop1();
+		System.out.println("----------------------------");
+		lp.loop3();
+		System.out.println("----------------------------");
+		lp.loop4();
+		System.out.println("----------------------------");
+		lp.loop5();
+		System.out.println("----------------------------");
+		System.out.println("----------------------------");
+		System.out.println("----------------------------");
+		System.out.println("----------------------------");
+		
 		//i++ vs ++i , ek sath 2 kaam,
 		
 //		int  i = 0 ;			
@@ -74,26 +87,40 @@ public class LoopMain {
 //		}
 		
 		
-		for(int i = 1,j = 1;j<=100000;j=j*10){
-		  System.out.println(i*j);	
-		}
 		
-		System.out.println();
-		System.out.println("example_1");
-		System.out.println("================");
-		
-		for(int i=0;i<=5;++i){
-//			System.out.println(i*"*");
-			for(int j =1;j<=i;j++) {
-				System.out.print("*");
-			}
-			System.out.println();
-		}
-		
-		for(int i =1;i<=5;i++) {
-			System.out.println("*".repeat(i));
-		}
-		
+//		
+//		for(int i = 1,j = 1;j<=100000;j=j*10){
+//		  System.out.println(i*j);	
+//		}
+//		
+//		System.out.println();
+//		System.out.println("example_1");
+//		System.out.println("================");
+//		
+//		for(int i=0;i<=5;++i){
+////			System.out.println(i*"*");
+//			for(int j =1;j<=i;j++) {
+//				System.out.print("*");
+//			}
+//			System.out.println();
+//		}
+//		
+//		for(int i =1;i<=5;i++) {
+//			System.out.println("*".repeat(i));
+//		}
+//		
+//
+//		System.out.println();
+//		System.out.println("example_2");
+//		System.out.println("================");
+//		
+//		for(int i =1;i<=10;i++) {
+//			
+//			for(int j = 1;j<=10;j++) {
+//				System.out.printf("%d ",i*j);
+//			}
+//			System.out.println();
+//		}
 
 	}		
 		
