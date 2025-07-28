@@ -10,11 +10,15 @@ public class LoopMain {
 		lp.loop3();
 		System.out.println("----------------------------");
 		lp.loop4();
-		System.out.println("----------------------------");
 		lp.loop5();
 		System.out.println("----------------------------");
+		lp.loop6(7);
 		System.out.println("----------------------------");
+		lp.loop7(5);
 		System.out.println("----------------------------");
+		lp.loop7(6);
+		System.out.println("----------------------------");
+		lp.loop8(5);
 		System.out.println("----------------------------");
 		
 		//i++ vs ++i , ek sath 2 kaam,
