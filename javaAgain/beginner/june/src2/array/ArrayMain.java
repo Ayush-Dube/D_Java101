@@ -79,23 +79,52 @@ public class ArrayMain {
 		}
 
 		System.out.println("---------------");
-		int[] oneD1 = { 123, 4, 133, 43, -23, 4, 0 ,-2312312,1234};
-		int res = Integer.MIN_VALUE;
-		
-		for(int e:oneD1) {
-			if(res<e) {
-				res=e;
+		int[] oneD1 = { 123, 4, 133, 43, -23, 4, 0, -2312312, 1234 };
+		int res = Integer.MIN_VALUE;// minus infinity;
+
+		for (int e : oneD1) {
+			if (res < e) {
+				res = e;
+			} else {
+				continue;
 			}
-			else {continue;}
 		}
-		
+
 		System.out.println(res);
 
 		// 2d array
 		// use square brackets Twice.
 
-//		int[][] twod = new int[][];
+		int[][] twoD = new int[3][3];
+		//[][] datatype pr hi double bracket .  =>[row][column]
 
+		System.out.println(twoD);
+		System.out.println(twoD[1][1]); //prints zero because default value set to zero .
+		
+		
+		char[][] charArr = new char[2][3];
+		
+		System.out.println(charArr[1]);//prints nothing ,because default value is Null, for char datatype.
+		//\u0000 (null char, not "null")
+		
+		
+		//observe the blank line  in the output terminal 
+		System.out.println(charArr);
+		
+		charArr[0][0]='j';
+		charArr[0][1]='v';
+		charArr[0][2]='m';
+		charArr[1][0]='j';
+		charArr[1][1]='r';
+		charArr[1][2]='e';
+		
+		for(char[] e:charArr) {
+			System.out.println(e);
+		}
+		
+		//Jagged Array
+		//keep the last [] empty 
+		
 	}
 
 }
