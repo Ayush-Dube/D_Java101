@@ -24,7 +24,7 @@ public class Circle {
 	}
 
 	void surfaceArea2() {
-		float res = pi * radius * this.radius;
+		float res = 4 * pi * radius * this.radius;
 		System.out.printf("Total surface Area for the given radius is :- %.2f %n", res);
 	}
 
@@ -44,7 +44,7 @@ public class Circle {
 		System.out.printf("A cicrcle has %d degree's in it. %n", x);
 	}
 
-	int[] myArr1 = { 1, 3, 7};
-	static int[] myArr2 = {1,2,5,11};
+	int[] myArr1 = { 1, 3, 7 };
+	static int[] myArr2 = { 1, 2, 5, 11 };
 
 }
