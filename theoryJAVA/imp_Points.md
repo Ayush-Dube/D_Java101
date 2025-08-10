@@ -1472,3 +1472,60 @@ class A {
 - why scn.close();
 - classcic scanner problem;
 - no cursor indicatior.
+
+# ⚡Memory Diagram
+- Method area
+- Heap 
+- Stack
+<details>
+
+</details>
+
+# ⚡Y Inheritance and How?
+- also how inheritance and polymorphism are related...
+<details>
+
+```java
+class Animal {
+    void sound() { // ✅ Declared in Animal
+        System.out.println("Generic animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() { // ✅ Override
+        System.out.println("Dog barks");
+    }
+
+    void bark() { // ❌ Not declared in Animal
+        System.out.println("Dog is barking loudly!");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+
+        // ---- Case 1: Method present in Animal ----
+        a.sound(); // ✅ Compile-time: Allowed (Animal has sound)
+                   // Runtime: Dog ka version chalega
+                   // Output: Dog barks
+
+        // ---- Case 2: Method only in Dog ----
+        // a.bark(); // ❌ Compile-time error: bark() not in Animal
+
+        // Agar bark() chalana hai to downcast:
+        ((Dog) a).bark(); // ✅ Runtime: Dog is barking loudly!
+    }
+}
+
+```
+
+>haan tou yehi tou mtlb huya na ki   ?
+> 1. a mei return datatype decide karyga ki method chalyga ki nah i age animal classmievo method hai tou chal jayga agr nahi tou error     
+>2. agr dono class mei same method name hai  
+tb construtor side vala mthed chalyga ??
+
+
+</details>
