@@ -1527,5 +1527,26 @@ public class Test {
 >2. agr dono class mei same method name hai  
 tb construtor side vala mthed chalyga ??
 
+### 🔶 moreDetailed
+
+```java
+class Animal {
+    String name;
+    void sound() { System.out.println("Grrr..."); }
+    void attack() { System.out.println(this.name + " will attack!"); }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() { System.out.println("Bark Bark"); }
+    void bark() { System.out.println("Bhow Bhow"); }
+}
+
+class Cat extends Animal {
+    // Nothing extra
+}
+
+```
+
 
 </details>
