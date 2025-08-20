@@ -1479,6 +1479,9 @@ class A {
 - Stack
 <details>
 
+- Click to see the codeFlow 
+[clickMe](https://cscircles.cemc.uwaterloo.ca/java_visualize/#code=public+class+Circle+%7B+++%0A%09%0A%09int+radius%3B%0A%09String+color%3B%0A%09%0A%09static+float+pi+%3D+3.14f%3B%0A%0A%09%0A%09Circle(int+radius)+%7B%0A%09%09this.radius+%3D+radius%3B%0A%09%7D%0A%0A%09%0A%0A%09void+perimeter1()+%7B%0A%09%09float+res+%3D+2+*+this.radius+*+Circle.pi%3B%0A%0A%09%09System.out.printf(%22Circumference+for+the+given+radius+is+%3A-+%25.2f+%25n%22,+res)%3B%0A%09%7D%0A%0A%09void+surfaceArea2()+%7B%0A%09%09float+res+%3D+4+*+pi+*+radius+*+this.radius%3B%0A%09%09System.out.printf(%22Total+surface+Area+for+the+given+radius+is+%3A-+%25.2f+%25n%22,+res)%3B%0A%09%7D%0A%0A%09void+volume3()+%7B%0A%09%09float+res+%3D+pi+*+radius+*+radius+*+radius+*+4+/+3%3B%0A%09%09System.out.printf(%22Volume+for+the+given+radius+is+%3A-+%25.2f%25n%22,+res)%3B%0A%09%7D%0A+++%0A%09static+void+staticInfo4()+%7B%0A%09%09int+x+%3D+360%3B%0A%09%09System.out.printf(%22A+cicrcle+has+%25d+degree's+in+it.+%25n%22,+x)%3B%0A%09%7D%0A%0A%09int%5B%5D+myArr1+%3D+%7B+1,+3,+7+%7D%3B%0A%09static+int%5B%5D+myArr2+%3D+%7B+1,+2,+5,+11+%7D%3B%0A+++public+static+void+main(String%5B%5D+args)+%7B%0A++++++%0A++++++%0A%09%09Circle.staticInfo4()%3B%0A%09%09System.out.println(Circle.pi)%3B%0A%0A%09%09Circle+c1+%3D+new+Circle(1)%3B%0A%09%09%0A%09%09System.out.println(c1)%3B%0A%09%09c1.perimeter1()%3B%0A%09%09c1.volume3()%3B%0A%09%09c1.surfaceArea2()%3B%0A%09%09%0A%09%09Circle+c2+%3D+new+Circle(3)%3B%0A%09%09%0A%09%09c2.volume3()%3B%0A%09%09c2.perimeter1()%3B%0A%09%09c2.surfaceArea2()%3B%0A%09%09System.out.println(c1.myArr1%5B1%5D)%3B%0A%0A%09%09System.out.println(Circle.myArr2%5B2%5D)%3B%0A%0A++++++%0A++++++%0A+++%7D%0A%7D&mode=display&curInstr=0)
+
 </details>
 
 # ⚡Y Inheritance and How?
@@ -1550,3 +1553,5 @@ class Cat extends Animal {
 
 
 </details>
+
+
