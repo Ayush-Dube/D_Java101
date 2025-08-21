@@ -29,6 +29,9 @@ public class FlowDemoMain {
 		System.out.println(c1.myArr1[1]);
 
 		System.out.println(Circle.myArr2[2]);
+		
+
+		Circle.c3.perimeter1();
 
 	}
 
