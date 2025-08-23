@@ -1554,4 +1554,13 @@ class Cat extends Animal {
 
 </details>
 
+# ⚡Methods
+
+```java
+accessModifier returnType methodName(parameters){
+    //methodBody
+}
+
+```
+
 
