@@ -50,11 +50,22 @@ public class MethodDemo {
 	
 	void ppr(String... str ) {
 		
-//		for(String i : str) {
-//			System.out.printf("%s",i);
-//		}
-		System.out.println(str.tocharArray());
+		for(String i : str) {
+			System.out.printf("%s",i);
+		}
+		
+		System.out.println();
+		
 	}
+	void ppr1(String... str1) {
+	    for (int i = 0; i < str1.length; i++) {
+	        System.out.print(str1[i]);
+	        if (i < str1.length - 1) {
+	            System.out.print(",");  // add comma except last element
+	        }
+	    }
+	}
+
 	
 	
 	
@@ -92,6 +103,10 @@ public class MethodDemo {
 		demo.uprFun("       AbcdG1& ");
 		
 		demo.ppr("a1","b2");
+		demo.ppr1("a1","b2");
+		
+//		System.out.println("pqrs".toCharArray());
+
 		
 	}
 
