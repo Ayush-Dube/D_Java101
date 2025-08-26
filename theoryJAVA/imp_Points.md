@@ -1563,4 +1563,17 @@ accessModifier returnType methodName(parameters){
 
 ```
 
+# ⚡Encapsulation
+>*Encapsulation is not a keyword -- its a design principle we apply  when we write classes.
+  Inheritance must be explicitly declared using `extends` or `implements`, and once that's done,polymorphism naturally comes into play. Abstraction on the other hand,is when we design classes or interface that hide implementation details and only exposes essential behavior. Together these four concepts -- Encapsulation,Inheritance,Polymorphism,Abstraction -- are the buildind blocks of  OOP in java.*
 
+>***Encapsulation is about how to access data.  
+ Abstraction is about what you expose to the outside world.  
+ Inheritance and polymorphism are about code reuse and behavior change.***
+
+- a class designing method/priciple where we use `private` `final` on  data members of the class, so that they are hidden . We also design `getX/setX` methods to access or alter these data members.
+
+
+```java
+
+```
