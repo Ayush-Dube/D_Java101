@@ -1573,7 +1573,72 @@ accessModifier returnType methodName(parameters){
 
 - a class designing method/priciple where we use `private` `final` on  data members of the class, so that they are hidden . We also design `getX/setX` methods to access or alter these data members.
 
+- Approach 1 -- `Only getX No setX`
 
 ```java
+public class Student {
+    private final String name;   // 🔒 final banaya
+    private String branch;
+    private int sem;
+
+    // Constructor se hi set hoga
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    // Branch aur sem ko update karna allowed
+    //for that  have to make getter and setter for it.
+    public String getBranch() { return branch; }
+    public void setBranch(String branch) { this.branch = branch; }
+
+    public int getSem() { return sem; }
+    public void setSem(int sem) { this.sem = sem; }
+}
+
+//in main() method
+
+    Student s1 = new Student("Ambr");  // name set ho gaya
+    System.out.println(s1.getName());  // Ambr
+    // s1.setName("Bobby"); ❌ Not possible (no setter)
+
+    // But branch & sem change kar sakte ho
+    s1.setBranch("Civil");
+    s1.setSem(5);
+
 
 ```
+
+- Approach 2 `Immutabel Class/Using Constructor`
+
+```java
+public final class Student {  //⚡observe->"final class" kr di,inheritance Blocked. 
+    private final String name;
+    private final String branch;
+    private final int sem;
+
+    public Student(String name, String branch, int sem) {
+        this.name = name;
+        this.branch = branch;
+        this.sem = sem;
+    }
+
+    public String getName() { return name; }
+    public String getBranch() { return branch; }
+    public int getSem() { return sem; }
+}
+
+//in main() method
+    Student s1 = new Student("Ambr", "Civil", 5);
+    System.out.println(s1.getName()); // Ambr
+
+    // s1.setName("Bobby"); ❌ setter hi nahi hai,this method does not exists.
+
+```  
+<br>
+
+>***making a class with `final` keyword , disables it for inheritance.***
+
