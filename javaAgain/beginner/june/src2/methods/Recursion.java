@@ -11,15 +11,30 @@ public class Recursion {
 			return x * (recur_it(x-1));
 		}
 	} 
+	
+	static int sumOf(int x) {
+		if(x==1) {
+			return 1;
+		}
+		else {
+			return x + sumOf(x-1);
+		}
+	}
 
 	public static void main(String[] args) {
 		
 		
 		System.out.println(recur_it(12));
+		System.out.println(sumOf(100));
 
 	}
 
 }
+
+
+
+
+
 
 //package methods;
 //
