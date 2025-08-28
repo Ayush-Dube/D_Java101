@@ -1650,4 +1650,189 @@ public final class Student {  //⚡observe->"final class" kr di,inheritance Bloc
 
 # ⚡Inheritance & Polymorphism
 
-- 
+<details>
+
+1. Inheritance  
+
+- Inheritance means acquiring properties and behaviors (fields and methods) of a parent class into a child class using the extends keyword.
+- It helps in code reusability and creates an “is-a” relationship.
+- Example:
+    - Dog is-an Animal.
+    - Cat is-an Animal.  
+
+👉 Methods and variables from Animal are available inside Dog and Cat automatically, but child-specific methods (like bark or meow) are not available in Animal, since inheritance works top-to-bottom, not bottom-to-top.
+
+2. Polymorphism     
+- Polymorphism means one interface, many implementations.
+- It allows the same method name to behave differently depending on the object at runtime.
+- In Java, polymorphism mainly happens through method overriding.
+
+👉 For example, if both Dog and Cat override makeSound(), then:
+
+```java
+Animal a = new Dog();
+a.makeSound();  // Dog's version will run
+
+a = new Cat();
+a.makeSound();  // Cat's version will run
+
+```
+Here, the reference type is Animal, but the actual object decides which method runs. This is called runtime polymorphism (or dynamic dispatch).
+
+## Polymorphic variable
+>.so the diff is that in polymorphism i have distinct variables c and d whereas in polymorphic var i have same x
+
+
+
+
+## Types of Polymorphism in Java  
+
+1. Compile-Time Polymorphism (Static Polymorphism / Method Overloading)   
+
+    - Achieved using method overloading (same method name, different parameter lists).
+    - Decided at compile time by the compiler (based on method signature).  
+    - Example:
+
+    ```java
+    
+    class MathUtils {
+        // same method name, different parameter types
+        int add(int a, int b) {
+            return a + b;
+        }
+
+        double add(double a, double b) {
+            return a + b;
+        }
+
+        int add(int a, int b, int c) {
+            return a + b + c;
+        }
+    }
+
+    public class Test {
+        public static void main(String[] args) {
+            MathUtils m = new MathUtils();
+            System.out.println(m.add(2, 3));       // calls int version
+            System.out.println(m.add(2.5, 3.5));   // calls double version
+            System.out.println(m.add(1, 2, 3));    // calls 3-arg version
+        }
+    }
+
+    ```
+
+👉 Here, which method is called is decided at compile-time.
+
+2. Runtime Polymorphism (Dynamic Polymorphism / Method Overriding)  
+
+    - Achieved using method overriding (child class provides its own implementation of a parent method).
+
+    - Decided at runtime by the JVM (based on object type, not reference type).
+
+    - Example:
+    ```java
+    class Animal {
+        void makeSound() {
+            System.out.println("Animal sound");
+        }
+    }
+
+    class Dog extends Animal {
+        @Override
+        void makeSound() {
+            System.out.println("Dog says: Woof Woof!");
+        }
+    }
+
+    class Cat extends Animal {
+        @Override
+        void makeSound() {
+            System.out.println("Cat says: Meow Meow!");
+        }
+    }
+
+    public class Test {
+        public static void main(String[] args) {
+            Animal a;  // polymorphic variable
+
+            a = new Dog();  
+            a.makeSound();  // Dog’s version → decided at runtime
+
+            a = new Cat();
+            a.makeSound();  // Cat’s version → decided at runtime
+        }
+    }
+
+    ```
+
+🎯 Interview-Ready Answer  
+
+- If asked “What are the types of polymorphism in Java?”  
+
+“Java supports two types of polymorphism:  
+>Compile-time polymorphism (method overloading) – where the same method name has different signatures and the call is resolved at compile time.  
+
+>Runtime polymorphism (method overriding) – where a subclass provides its own implementation of a method, and the call is resolved at runtime based on the actual object, using a polymorphic variable.”
+
+
+<details>
+
+```java
+
+// Base class
+class Animal {
+    void makeSound() {
+        System.out.println("Some generic sound");
+    }
+}
+
+// Child classes
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+
+class Cat extends Animal {
+    void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+// New class added later
+class Bird extends Animal {
+    void makeSound() {
+        System.out.println("Tweet!");
+    }
+}
+
+// Factory to decide which Animal to create
+class AnimalFactory {
+    static Animal getAnimal(String type) {
+        switch (type.toLowerCase()) {
+            case "dog": return new Dog();
+            case "cat": return new Cat();
+            case "bird": return new Bird();  // <-- just one new line
+            default: return new Animal();
+        }
+    }
+}
+
+public class Zoo {
+    public static void main(String[] args) {
+        // Suppose these types come from user input or a database:
+        String[] animalTypes = {"dog", "cat", "bird"};
+
+        for(String type : animalTypes) {
+            Animal a = AnimalFactory.getAnimal(type);
+            a.makeSound(); // Calls the correct version automatically
+        }
+    }
+}
+
+``` 
+
+</details>
+
+
+</details>
