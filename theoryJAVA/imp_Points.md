@@ -1571,7 +1571,10 @@ accessModifier returnType methodName(parameters){
  Abstraction is about what you expose to the outside world.  
  Inheritance and polymorphism are about code reuse and behavior change.***
 
-- a class designing method/priciple where we use `private` `final` on  data members of the class, so that they are hidden . We also design `getX/setX` methods to access or alter these data members.
+<details>
+
+- a class designing method/priciple where we use `private` `final` on  data members of the class, so that they are hidden . We also design `getX/setX` methods to access or alter these data members.  
+- The way `Constructor's` are designed in this approach is also vital.
 
 - Approach 1 -- `Only getX No setX`
 
@@ -1642,3 +1645,9 @@ public final class Student {  //⚡observe->"final class" kr di,inheritance Bloc
 
 >***making a class with `final` keyword , disables it for inheritance.***
 
+</details>
+
+
+# ⚡Inheritance & Polymorphism
+
+- 
