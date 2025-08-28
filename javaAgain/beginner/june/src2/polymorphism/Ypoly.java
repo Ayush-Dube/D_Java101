@@ -90,6 +90,9 @@ public class Ypoly {
 
 		// So if u had to run "Woof Woof" , why did u even write Animal x = new Dog();
 		// just directly write Dog x = new Dog();
+		//because u never know what kind of object u may get in return.
+		//so u put a Super class -->Animal ,which is parent to all future child class.
+		//and can handle any child as Return type.
 
 	}
 
