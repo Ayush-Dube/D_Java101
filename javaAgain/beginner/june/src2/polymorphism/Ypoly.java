@@ -61,6 +61,7 @@ public class Ypoly {
 		// same method name is behaving differently , depending on the object type.
 
 		System.out.println("---------");
+		
 		// Polymorphic Variable
 		Animal x; // <--polymorphic variable
 
@@ -75,6 +76,10 @@ public class Ypoly {
 
 		// so the use of x ,some time as a dog and some time as a Cat is acheived by
 		// polymorphic variable.
+		
+		//U might have observer that in polymorphism the object variable were different i.e a,b,c
+		//because they were made using Animal(),Dog(),Cat() object type.
+		//But in polymorphic variable same x variable is used differntly.
 
 		System.out.println("---------");
 
