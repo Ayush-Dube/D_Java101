@@ -22,6 +22,6 @@ public class Soldier extends Human{
 
 
     public void does(){
-        System.out.printf("At %d ,%s  Fights and Protects.%n",age,name);
+        System.out.printf("At %d ,%s  Fights and Protects.%n",this.age,this.name);
     }
 }

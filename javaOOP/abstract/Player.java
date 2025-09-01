@@ -13,12 +13,12 @@ public class Player extends Human {
 
 
     public void does(){
-        System.out.printf("At %d , %s Plays a game.%n", age, name);
+        System.out.printf("At %d , %s Plays a game.%n", this.age, this.name);
     }
     
     
-    public static void main(String[] args){
-        System.out.println("Players main method");
-    }
+    // public static void main(String[] args){
+    //     System.out.println("Players main method");
+    // }
 
 }

@@ -18,11 +18,12 @@ public class TopClass {
 		
 	public static class MiddleClass2{
 //		String place = "Mumbai";
-//		int num = 67890;
+//		int num = 67890; //can not have non static thing inside a static 
 		static String place = "Mumbai";
 		static int num = 67890;
 		
 		void showInfo_M2() {
+			
 			System.out.println("Static class having non_Static methods"+place+" "+num);			
 			
 		}

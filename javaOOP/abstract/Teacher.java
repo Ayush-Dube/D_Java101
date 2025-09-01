@@ -14,7 +14,7 @@ private int age;
 
 
     public void does(){
-        System.out.printf("At %d , %s Guides and teaches. %n",age,name);
+        System.out.printf("At %d , %s Guides and teaches. %n",this.age,this.name);
     }
 
 
