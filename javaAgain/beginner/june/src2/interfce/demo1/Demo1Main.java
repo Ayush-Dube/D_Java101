@@ -18,7 +18,8 @@ public class Demo1Main {
 		
 		nokia.selfie();
 		Camera.slowMo();
-		nokia.slowMo();
+//		nokia.slowMo();
+		//👉 Matlab nokia sirf runtime pe hi truly exist karta hai. Compile time pe bas "type checking" hota hai.
 
 	}
 
@@ -30,11 +31,57 @@ public class Demo1Main {
  * 			int method2();  //implicitly public + abstract  
  * 		}
  *  	
- *  	Default Nature
+ *  	1.Default Nature
  *  	 - all methods are PUBLIC and ABSTRACT (unless you use default or static for making normal methods).
  *  	 - all variables in a interface are PUBLIC STATIC FINAL -->constants
- *  
+ *  	
+ *  	2.Inheritance
  *  	class C implements A,B
+ *  
+ *      3.Since Java 8 
+ *        - apart from abstract methods you can now add normal methods too.
+ *        - But they have to be STATIC or DEFAULT
+ *        - default void greet(){sysout("Hi...a normal method inside using default keyword ")}
+ *        - static void greetings(){sysout("a static method using static keyword")}
+ *        - in Java 9 , private methods also allowed.
+ *        
+ *      4.No Constructor
+ *      
+ *      5.Polymorphism with Interface
+ *        - Animal a = new Dog()
+ *        - a.eat()
+ *        - Animal is a interface
+ *        
+ *      6.Loose Coupling 
+ *      
+ *      7.Example
+            interface Flyable {
+				    void fly();
+				}
+				
+			interface Swimmable {
+				    void swim();
+				}
+				
+			class Duck implements Flyable, Swimmable {
+				    public void fly() {
+				        System.out.println("Duck flies low");
+				    }
+				    public void swim() {
+				        System.out.println("Duck swims in water");
+				    }
+			}
+				
+			public class Main {
+				    public static void main(String[] args) {
+				        Flyable f = new Duck();   // Polymorphism
+				        f.fly();
+				        
+				        Swimmable s = new Duck();
+				        s.swim();
+				    }
+			}
+
  *  
  * 
  * 

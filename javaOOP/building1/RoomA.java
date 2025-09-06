@@ -9,7 +9,7 @@ public class RoomA{
         System.out.println(name+x+" is private method.");
     }
 
-    void resultDefault(){
+    void resultDefault(){ //default
         System.out.println(name+x+" is default method.");
     }
 
@@ -18,7 +18,7 @@ public class RoomA{
     }
 
     public void resultPublic(){
-        System.out.println(name+x+" is public method.");
+        System.out.println(name+x+" is public method.  Newset2");
 
     }
 
@@ -31,5 +31,6 @@ public class RoomA{
         obj.resultPrivate();
         obj.resultDefault();
         obj.resultProtected();
+        obj.resultPublic();
     }
 }
