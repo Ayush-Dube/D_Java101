@@ -21,9 +21,26 @@ public class Demo1Main {
 //		nokia.slowMo();
 		//👉 Matlab nokia sirf runtime pe hi truly exist karta hai. Compile time pe bas "type checking" hota hai.
 
+		
+		//lets try anonymous class which I came across after learning interface
+		
+		SmartPhone motorola = new SmartPhone() {
+			public void takePhoto() {System.out.println("Taking pic with 50MP camera");}
+			public void recordVideo() {System.out.println("Recording in 2K...");}
+			public void randomMethod() {System.out.println("random");}
+			};
+			
+		motorola.takePhoto();
+		motorola.recordVideo();
+		motorola.randomMethod();
+			//above line will not work because randomMethod is not available to be overridden
+			//go to the parent class and declare it 
+			
+			
+		}
 	}
 
-}
+
 
 /*
  * 		Interface MyInterface{ 

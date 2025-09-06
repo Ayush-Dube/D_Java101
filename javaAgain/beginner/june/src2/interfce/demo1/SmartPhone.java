@@ -26,7 +26,10 @@ public class SmartPhone implements Camera, MusicPlayer, Telephone { // observe t
 	public void answer() {
 		System.out.println("📲 Answering the call");
 	}
-
+	
+	
+	//for Anonymous class purpose
+	public void randomMethod() {}
 
 
 }

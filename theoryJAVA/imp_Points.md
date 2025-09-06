@@ -1647,6 +1647,7 @@ public final class Student {  //⚡observe->"final class" kr di,inheritance Bloc
 
 </details>
 
+# ⚡Constructor
 
 # ⚡Inheritance & Polymorphism
 
@@ -1836,3 +1837,62 @@ public class Zoo {
 
 
 </details>
+
+# ⚡Abstraction
+
+# ⚡Interface
+
+<details>
+
+#### 1. Syntax
+
+```java
+Interface MyInterface{ 
+  			void method1(); //implicitly public + abstract
+  			int method2();  //implicitly public + abstract  
+  		}
+```
+
+#### 2. By default
+- all methods inside a interface are `public` and `abstract`
+>But remember byDesign interface methods are automatically public and abstract. So u delibratly have to use `default` or `static` keyword to make them normal.
+- all variables in a interface are constant i.e `public static final`.
+
+#### 3. Implementation
+- ClassA implements Interface{}
+- a subclass i.e a class which implements an interface --must override all methods mentioned in that interface. ⁉️what if empty login no code just strucutre.
+- if all methods are not overridden -- that subclass must be declared with `abstract` keyword. otherwise error.
+
+#### 4. Multiple inhertiance
+- class C implements A,B{}
+- ⁉️ how does polymorphism work then in this case
+
+#### 5. No construtor
+
+#### 5. Interface vs Abstract class
+- how to decide what approach to choose for generic class that will do polymorphism perfectly .
+
+#### 6. New features
+- can add normal methods as well using default or static keyword(non-abstract methods,need not implementation )
+- static methods can be used  
+
+    ```java
+    interface A{
+        public static greet(){}
+    }
+
+    ```
+- private methods also allowed
+- 
+#### functional interface
+- Interface with only one abstract method.
+- lambda expressions
+
+
+</details>
+
+# ⚡Access Modifiers
+# ⚡Static keyword
+# ⚡Inner Class
+
+- 4 types

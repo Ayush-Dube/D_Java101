@@ -6,7 +6,7 @@ interface A {
 
 
 class B implements A{
-	public void method1() {System.out.println("method1 from Br̥");}
+	public void method1() {System.out.println("method1 from Br");}
 }
 
 public class AnonymousClass {
