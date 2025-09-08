@@ -18,6 +18,7 @@ public class Demo1Main {
 		
 		nokia.selfie();
 		Camera.slowMo();
+//		Camera.selfie(); // will not work because its a non-static method inside interface (using default keyword)
 //		nokia.slowMo();
 		//👉 Matlab nokia sirf runtime pe hi truly exist karta hai. Compile time pe bas "type checking" hota hai.
 
@@ -35,6 +36,33 @@ public class Demo1Main {
 		motorola.randomMethod();
 			//above line will not work because randomMethod is not available to be overridden
 			//go to the parent class and declare it 
+		
+		//accessing static variables 
+		System.out.println(MusicPlayer.minVolume +","+MusicPlayer.volumeLimit);
+		System.out.println(nokia.minVolume +","+motorola.volumeLimit);
+		/*
+		 * But I dont understand why I cant access static method using Object reference but can access a variable
+		 * using object reference.
+		 * */
+		
+		MusicPlayer.battery();
+//		motorola.battery();// gives error
+		System.out.println(motorola.volumeLimit);//does not give error
+		
+		//private variable in implementing class
+		nokia.increaseVol();
+		nokia.increaseVol();
+		nokia.increaseVol();
+		nokia.increaseVol();
+		nokia.increaseVol();
+		
+		System.out.println("----");
+		motorola.increaseVol();
+		motorola.increaseVol();
+		motorola.increaseVol();
+		motorola.increaseVol();
+		
+		
 			
 			
 		}

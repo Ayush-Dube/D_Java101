@@ -30,6 +30,18 @@ public class SmartPhone implements Camera, MusicPlayer, Telephone { // observe t
 	
 	//for Anonymous class purpose
 	public void randomMethod() {}
+	
+	
+	int volume = 50;
+	public void increaseVol() {
+		if(volume<MusicPlayer.volumeLimit) {
+			volume++;
+			System.out.println("volume: "+volume);
+		}
+		else {
+			System.out.println("Maximum volume reached");
+		}
+	}
 
 
 }
