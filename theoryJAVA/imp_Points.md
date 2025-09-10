@@ -2297,6 +2297,87 @@ A obj = new B() {
 
 ---
 
+
+### Q2 – Extra methods jo parent class/interface me nahi hain, bana sakte hain kya?
+
+👉 Haan, bana sakte ho but ek problem hai:  
+
+- Reference type (A x = ...) ke through unhe call nahi kar paoge.
+
+- Kyunki compiler ko A ke methods hi dikhai dete hain.
+
+- Tumhara extra() method runtime par object me hoga, lekin compile-time pe accessible nahi hoga.
+
+Example:
+```java
+A x = new B() {
+    @Override
+    public void method1() {
+        System.out.println("new m1");
+    }
+    public void extra() {
+        System.out.println("fresh method");
+    }
+};
+
+x.method1(); // ✅ okay
+// x.extra();  // ❌ compile error: method not found in type A
+```
+
+⚠️ Tum reflection use karke call kar sakte ho, lekin normally aise methods ka fayda nahi hai.
+
+---
+
+### Q3 – Anonymous class me sirf parent class/interface ke same-name methods hi override hote hain?
+
+👉 Bilkul ✔️.
+
+- Jo methods parent type (class/interface) me declare hue hain, unhi ko override kar sakte ho.
+
+- Agar same-name method likhoge → override hoga.
+
+- Agar new naam ka method likhoge → woh bas us anonymous class ka internal method ban jayega, reference type ke through call nahi hoga.
+```java
+Example:
+
+class C {
+    void show() { System.out.println("C show"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        C obj = new C() {
+            @Override
+            void show() { // override
+                System.out.println("Anonymous override show");
+            }
+            void hello() { // new method
+                System.out.println("New method in anonymous");
+            }
+        };
+
+        obj.show();   // prints: Anonymous override show
+        // obj.hello(); // ❌ compile error: hello() not defined in type C
+    }
+}
+```
+---
+✅ Summary (Interview-ready)  
+
+1. Implement all methods?
+
+    - If directly implementing interface → yes, all.
+
+    - If extending a concrete class (that already implements interface) → only override what you need.
+
+2. Extra methods?
+
+    - Can be written, but not accessible via parent type reference.
+
+3. Which methods get overridden?
+
+    - Only those declared in parent type (class/interface). New methods are hidden unless you cast or use reflection.
+
 </details>
 
 ### ⁉️⁉️Questions⁉️⁉️
@@ -2437,11 +2518,292 @@ Engine of Yamaha is starting...
 
 </details>
 
-4. Anonymous class ko use krne ke leye  ObjectTypr ko subClass hona jaruro hai RetrunType ka?
+---
 
-<details>
-</details>
-
-
+### Recap
+### 💛💛Gold⚒️Mine
 
 
+### 1. Quick recap — Static nested vs Non-static inner  
+
+- Non-static inner class (aka member inner class): `class Outer { class Inner { ... } }`
+
+    - Har Inner object ka ek Outer instance se link hota hai (`Outer.this`).
+
+    - Instantiate karne ke liye outer instance chahiye: `Outer o = new Outer(); Outer.Inner i = o.new Inner();`
+
+    - Inner class can access outer’s instance members (even private).
+
+    - Inner class cannot declare static members (except `static final` constants).
+
+- Static nested class: class Outer { static class Nested { ... } }
+
+    - No link to an Outer instance. Works like a top-level class namespaced inside Outer.
+
+    - Instantiate without outer: Outer.Nested n = new Outer.Nested();
+
+    - Static nested class can have static members.
+
+###  2. Syntax rules & type names
+
+- Type name for nested classes (any level) is written with dots: Outer.Middle.Inner (this is the type).
+
+- Instantiation depends on whether the class you are creating is static or non-static:
+
+    - Static nested: Outer.Middle.Inner obj = new Outer.Middle.Inner();
+
+    - Non-static inner: you must first create the enclosing instance(s), then use outerRef.new Inner():
+
+        - `Outer outer = new Outer(); Outer.Middle middle = outer.new Middle();`
+          `Outer.Middle.Inner inner = middle.new Inner();`
+
+- Inside the outer class instance methods, you can use new Middle() / new Inner() directly (no outer. needed) because this is implied.
+
+- Important rule: You cannot declare a static member class inside a non-static inner class. (Static member classes are allowed only in top-level classes or inside other static member classes.)
+
+### 3. Three-tier examples (practical) — multiple permutations + how to make objects
+
+#### 3.1 Case A — Outer → (non-static) Middle → (non-static) Inner
+
+All are non-static member classes. Inner tied to Middle instance; Middle tied to Outer instance.
+```java
+public class OuterA {
+    String name = "OUTER-A";
+
+    class Middle {
+        String m = "MIDDLE-A";
+
+        class Inner {
+            void show() {
+                System.out.println(name + " -> " + m + " -> INNER-A");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // 1) create Outer instance
+        OuterA outer = new OuterA();
+
+        // 2) create Middle bound to outer
+        OuterA.Middle middle = outer.new Middle();
+
+        // 3) create Inner bound to middle (and transitively to outer)
+        OuterA.Middle.Inner inner = middle.new Inner();
+
+        inner.show(); // prints: OUTER-A -> MIDDLE-A -> INNER-A
+    }
+}
+```
+
+
+#### Summary for Case A (non-static → non-static → non-static):
+
+- Type name: OuterA.Middle.Inner
+
+- Instantiate steps:
+
+    1. OuterA outer = new OuterA();
+
+    2. OuterA.Middle middle = outer.new Middle();
+
+    3. OuterA.Middle.Inner inner = middle.new Inner();
+
+#### 3.2 Case B — Outer → (static) Middle → (non-static) Inner
+
+Middle is static. You can create Middle without Outer. Inner is non-static inside Middle, so Inner tied to Middle instance.
+
+```java
+public class OuterB {
+    static class Middle {
+        String m = "MIDDLE-B";
+
+        class Inner {
+            void show() {
+                System.out.println("Inner inside static Middle: " + m);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // 1) Middle is static — create it directly
+        OuterB.Middle middle = new OuterB.Middle();
+
+        // 2) Inner is non-static of Middle — needs middle instance
+        OuterB.Middle.Inner inner = middle.new Inner();
+
+        inner.show(); // prints: Inner inside static Middle: MIDDLE-B
+    }
+}
+```
+
+#### Summary for Case B (static Middle → non-static Inner):
+
+- Type: OuterB.Middle.Inner
+
+- Instantiate:
+
+    1. OuterB.Middle middle = new OuterB.Middle();
+
+    2. OuterB.Middle.Inner inner = middle.new Inner();
+
+#### 3.3 Case C — Outer → (static) Middle → (static) Inner
+
+Both nested classes are static. No outer/middle instances required to create inner.
+```java
+public class OuterC {
+    static class Middle {
+        static class Inner {
+            static void staticShow() {
+                System.out.println("Static Inner in static Middle - staticShow");
+            }
+            void show() {
+                System.out.println("Static Inner in static Middle - instance show");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // static method call
+        OuterC.Middle.Inner.staticShow();
+
+        // create instance directly
+        OuterC.Middle.Inner inner = new OuterC.Middle.Inner();
+        inner.show();
+    }
+}
+```
+
+
+#### Summary for Case C (static → static):
+
+- Type: OuterC.Middle.Inner
+
+- Instantiate: new OuterC.Middle.Inner() (no outer/middle object needed)
+
+### 3.4 Forbidden case (Illegal) — Outer → (non-static) Middle → (static) Inner
+
+You cannot put a static member class inside a non-static member class. This will give compile error.
+```java
+class Outer {
+    class Middle {
+        static class Inner { } // ❌ compile error: static declarations in inner classes are not allowed
+    }
+}
+```
+
+Rule: static member classes are allowed only in top-level classes or static member classes.
+
+## 4. Instantiation Cheat-Sheet (short)
+|Nested type|Type name (use)|How to create|
+|---|---|---|		
+|`Outer.Inner` non-static|	`Outer.Inner x`	|`Outer o = new Outer(); Outer.Inner x = o.new Inner()`;|
+|`Outer.StaticNested`|	`Outer.StaticNested x`	|`Outer.StaticNested x = new Outer.StaticNested();`|
+|3-tier static→static|	`Outer.Middle.Inner`|	`new Outer.Middle.Inner()`|
+|3-tier static→non-static|	`Outer.Middle.Inner`	|`Outer.Middle mid = new Outer.Middle(); Outer.Middle.Inner i = mid.new Inner();`|
+|3-tier non-static→non-static|	`Outer.Middle.Inner`|	`Outer o = new Outer(); Outer.Middle m = o.new Middle(); Outer.Middle.Inner i = m.new Inner();`|
+
+>Note: You can always declare a variable using the dotted type name (e.g., Outer.Middle.Inner var;) but creation expression must follow the rules above.
+
+## 5. Using type as return type obj = new targetClass() pattern
+
+You can write:
+```java
+Outer.Middle.Inner ref = /* appropriate creation expression (see above) */;
+```
+
+So the left side is the type (Outer.Middle.Inner) and the right side is how you create the object (may require outer.new Middle() etc.). Example:
+```java
+OuterA outer = new OuterA();
+OuterA.Middle middle = outer.new Middle();
+OuterA.Middle.Inner obj = middle.new Inner();
+return obj; // if your method return type is OuterA.Middle.Inner
+```
+## 6. Extra notes & tips (interview ready)
+
+- Why use static nested? When nested type does not need access to outer instance — it’s cleaner and avoids unnecessary Outer reference.
+
+- Why use non-static inner? When inner needs access to outer’s instance fields/methods (even private).
+
+- Fully qualified name: packageName.Outer.Middle.Inner if you need the full path.
+
+- From within Outer instance methods you can write new Middle() or new Middle().new Inner() (if allowed) because this is implied.
+
+- From static context (like public static void main) you cannot just new Middle() if Middle is non-static — you first need an Outer instance.
+
+- Anonymous classes can be used to create quick subclasses/implementations, but their instantiation rules follow same static/non-static binding (if anonymous subclass is for a non-static inner class, you must still have its outer instance).
+
+
+## 7.Final
+
+```java
+public class NestedDemo {
+    // Case A: non-static -> non-static -> non-static
+    static class CaseA {
+        static class Demo {
+            // just a holder for structure
+        }
+    }
+
+    // Real examples:
+    // 1) non-static Middle -> non-static Inner
+    static class Ex1 {
+        // top-level for demo only (we mimic OuterA structure):
+        static class OuterA {
+            String name = "OUTER-A";
+            class Middle {
+                String m = "MIDDLE-A";
+                class Inner {
+                    void show() { System.out.println("A: " + name + "->" + m + "->INNER"); }
+                }
+            }
+        }
+        static void run() {
+            OuterA outer = new OuterA();
+            OuterA.Middle middle = outer.new Middle();
+            OuterA.Middle.Inner inner = middle.new Inner();
+            inner.show();
+        }
+    }
+
+    // 2) static Middle -> non-static Inner
+    static class Ex2 {
+        static class OuterB {
+            static class Middle {
+                String m = "MIDDLE-B";
+                class Inner {
+                    void show() { System.out.println("B: Inner inside static Middle: " + m); }
+                }
+            }
+        }
+        static void run() {
+            OuterB.Middle middle = new OuterB.Middle();
+            OuterB.Middle.Inner inner = middle.new Inner();
+            inner.show();
+        }
+    }
+
+    // 3) static Middle -> static Inner
+    static class Ex3 {
+        static class OuterC {
+            static class Middle {
+                static class Inner {
+                    static void staticShow() { System.out.println("C: Static Inner staticShow"); }
+                    void show() { System.out.println("C: Static Inner instance show"); }
+                }
+            }
+        }
+        static void run() {
+            OuterC.Middle.Inner.staticShow();
+            OuterC.Middle.Inner inner = new OuterC.Middle.Inner();
+            inner.show();
+        }
+    }
+
+    public static void main(String[] args) {
+        Ex1.run();
+        Ex2.run();
+        Ex3.run();
+    }
+}
+
+```
