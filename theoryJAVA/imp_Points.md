@@ -2139,13 +2139,308 @@ public class Test {
 
 
 
+
 # ⚡Access Modifiers
 # ⚡Static keyword
+
 # ⚡Inner Class
 
-- 4 types
+
+1. `A class defined inside another class`.
+  
+2. Types
+    - Static inner class
+    - Non-static inner class
+    - method inner class
+    - Anonymous Inner class
 
 
+3. Key points
+    - Outer class is called "Enclosing Class".
+    - static things can not use non-static thing directly , it has too have a objectReferenec.
+    - whereas a non static class or member can reach out and use static things directly.[no need to make an object] 
+
+    - both static and nonStatic inner classes can access enclosing classes private variables
+    as per static/nonstaic type.
+
+
+4. Why
+    - Logiacl grouping,Encapsulation,Readability,Event Handling /callbacks
+
+    
+### Static Inner class
+- static keyword
+- Does not require the enclosing class object.
+- can only access static members of the outer class.(since nonstatic inside a static , not allowed.)
+
+```java
+class Car{
+    static String company ="Tesla";
+
+    static class Battery{
+        void charge(){
+            System.out.println("Charging "+company+"battery...");
+        }
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Car.Battery car1 = new Car.Battery();
+        car1.chargey();
+    }
+}
+```
+
+    
+    
+### Non Static-Inner class
+- Related to instance of outer class.
+- can access all members(even private) of outer class/enclosing class.
+- non static Inner class object is always tied to the Outer class object.
+- obj.new Inner();
+
+### Method-local Inner class
+- coded inside a method Outer class.
+- Scope is just within the method.
+- 
+
+### Anonymous class
+- Trickest
+- See the class is already mentioned in the code, its just that we can make adhoc changes to the 
+  methods that can be overridden, with out going to actually go the class file and make those changes there.?
+- A x = new A/subA(){ override methods whichare present in classA/interfaceA}
+- You can also add extra methods but they have to be mentioned in the parent class.?
+- Anonymous class always is implementing a existing type(normalClaas/abstract class/interface).
+- jo method tum override krte ho usko parent class mei declare hona mandatory hai.
+
+- `new SomeType() {}` must  exists
+    - either as interface or abstract class or concrete class.Compiler needs `SomeType`.
+    - 
+
+```java
+Thread t2 = new Thread() {
+    @Override
+    public void run() {
+        System.out.println("Anonymous Thread subclass run()");
+    }
+};
+t2.start();
+
+```
+
+```java
+interface A {
+    void method1();
+    void method2();
+}
+
+class B implements A {
+    public void method1() {
+        System.out.println("hi im m1");
+    }
+    public void method2() {
+        System.out.println("hi im m2");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        A x = new B() {
+            @Override
+            public void method1() {
+                System.out.println("hello im newer m1");
+            }
+
+            // ❌ yeh default method anonymous class me nahi chalega
+            // public void extra() {
+            //     System.out.println("freshly made method here hi");
+            // }
+        };
+
+        x.method1();  // prints: hello im newer m1
+        x.method2();  // prints: hi im m2
+    }
+}
+
+```
+#### More Anonymous 
+
+<details>
+
+### Q1 – Kya anonymous class me interface ke sare methods implement karne padenge?
+
+👉 Depends on case:  
+
+1. Agar tum direct new A() { ... } likhte ho
+
+    - To interface ke sare abstract methods implement karna compulsory hai, kyunki tum directly A ko implement kar rahe ho.
+```java
+A obj = new A() {
+    public void method1() { System.out.println("m1"); }
+    public void method2() { System.out.println("m2"); }
+};
+```
+
+2. Agar tum kisi class B ka object bana rahe ho jo pehle hi A implement karti hai
+
+    - To uske methods pehle se implemented hain, tum sirf chahe to kuch methods override kar sakte ho, zaroori nahi sab karna.
+```java
+A obj = new B() {
+    @Override
+    public void method1() { System.out.println("new m1"); }
+    // method2() pehle se B me hai, override karna optional hai
+};
+```
+
+✅ Tumhare example me B already dono methods implement karta hai, isliye anonymous class me tumhe dono likhne ki zaroorat nahi — sirf method1() override kiya to bhi chalega.
+
+---
+
+</details>
+
+### ⁉️⁉️Questions⁉️⁉️
+
+1. 
+
+<details>
+
+Great question! Here’s why your code doesn’t work:
+
+### Why not `Car car1 = new Battery();`?
+
+- **`Battery` is a static inner class inside `Car`.**
+- It is NOT a subclass of `Car` — it’s a separate class nested inside `Car`.
+- There is **no inheritance** between `Car` and `Battery`.
+
+#### Polymorphism only works when there is inheritance:
+- Example:  
+  ```java
+  class Animal {}
+  class Dog extends Animal {}
+  Animal a = new Dog(); // ✅ Allowed (Dog IS-A Animal)
+  ```
+
+#### In your case:
+- `Car.Battery` is NOT a subclass of `Car`.
+- So, `Car car1 = new Battery();` is a **compile-time error**:  
+  > "incompatible types: Battery cannot be converted to Car"
+
+#### Correct usage:
+- You must use the fully qualified name:
+  ```java
+  Car.Battery car1 = new Car.Battery();
+  car1.charge();
+  ```
+
+#### Summary:
+- **Static inner class ≠ subclass.**
+- No polymorphism between enclosing class and its static inner class.
+- Use `Car.Battery` as the type, not `Car`.
+
+If you want polymorphism, you need inheritance (`extends`). Static inner classes are just nested classes, not child classes.
+
+</details>
+
+2. why to make a engine class, instead just make a method?
+
+<details>
+
+#### so yes we can do that, but that would have limited use.
+- supoose later u wan tmore function/features  to add to it . If you add all the features to a single method 
+they all would run at the same time .
+- Inner class gives you option to be selective and use particular functions.
+-`We can even use a static inner class without needing the enclosing class object`.
+
+```java
+class Car {
+    private String brand ="Tesla";
+    //sirf ek method banana ho toh aisa kr sakte hain 
+    void startEngine() {
+        System.out.println("engine of "+brand+"is starting...");
+    }
+
+    //but  if u make a class Engine , you could add more features to it
+
+    Class Engine{
+        void start() {Sysout("Engine of"+brand+"is sitting...");}
+        void checkOil() {Sysout("Oil level is OK.");}
+    }
+}
+```
+
+</details>
+
+3. Que
+
+<details>
+
+👉 Agar tum Engine ko non-static inner class banate ho, toh woh Car ke object ke bina exist nahi kar sakta. Matlab:
+
+Car car = new Car();
+Car.Engine engine = car.new Engine();
+
+
+⚠️ Problem: Ab tum Engine ko Truck ya Bike ke saath reuse nahi kar paoge.
+
+✅ Solution → Engine ko static nested class bana do (ya phir completely alag top-level class bana do).
+
+Example:
+
+```java
+class Car {
+    String brand;
+    Car(String brand) { this.brand = brand; }
+
+    // Static nested class
+    static class Engine {
+        void start(String brand) {
+            System.out.println("Engine of " + brand + " is starting...");
+        }
+    }
+}
+
+class Truck {
+    String brand;
+    Truck(String brand) { this.brand = brand; }
+}
+
+class Bike {
+    String brand;
+    Bike(String brand) { this.brand = brand; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Car ke saath Engine use
+        Car car = new Car("Tesla");
+        Car.Engine engine1 = new Car.Engine();
+        engine1.start(car.brand);
+
+        // Truck ke saath Engine use
+        Truck truck = new Truck("Volvo");
+        Car.Engine engine2 = new Car.Engine();
+        engine2.start(truck.brand);
+
+        // Bike ke saath Engine use
+        Bike bike = new Bike("Yamaha");
+        Car.Engine engine3 = new Car.Engine();
+        engine3.start(bike.brand);
+    }
+}
+//output 
+Engine of Tesla is starting...
+Engine of Volvo is starting...
+Engine of Yamaha is starting...
+
+```
+
+</details>
+
+4. Anonymous class ko use krne ke leye  ObjectTypr ko subClass hona jaruro hai RetrunType ka?
+
+<details>
+</details>
 
 
 
