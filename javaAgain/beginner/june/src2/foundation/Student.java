@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class Student {
     // Non-static (instance) variables
-    String name;
+    public String name;
     int age;
     String branch;
 
     // Static (class-level) variables
-    static String schoolName = "HighClass School";
+    public static String schoolName = "HighClass School";
     static String principal = "Mr. Xavier";
 
     // ✅ Static list of shared teachers
