@@ -2807,3 +2807,13 @@ public class NestedDemo {
 }
 
 ```
+<br>
+
+
+# ⚡Exception Handling
+
+<details>
+
+
+
+</details>

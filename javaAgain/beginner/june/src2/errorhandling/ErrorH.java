@@ -26,6 +26,7 @@ import foundation.Student;
  *   - checked/unchecked exceptions
  *   - FileNot found
  *   - throws
+ *   - finally
  *   
  * 
  * 
