@@ -41,8 +41,8 @@ public class ArrayListt {
 			choice1 = scn.nextInt();
 			scn.nextLine();
 			
-			for(int i = 0 ; i<choice1;i++) {
-				System.out.print("Enter food number "+(i+1)+"...- ");
+			for(int i = 1 ; i<=choice1;i++) {
+				System.out.print("Enter food number "+i+"...- ");
 				String f = scn.nextLine();
 				foods.add(f);
 			}
