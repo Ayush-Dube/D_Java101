@@ -22,11 +22,11 @@ import foundation.Student;
  *   - nullpoint
  *   - out of bound 
  *   - zero division
- *   - type mismatch from user end 
+ *   - type mismatch from user end  
  *   - checked/unchecked exceptions
  *   - FileNot found
  *   - throws
- *   - finally
+ *   - finallyr
  *   
  * 
  * 
