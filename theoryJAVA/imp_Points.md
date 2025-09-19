@@ -2817,3 +2817,55 @@ public class NestedDemo {
 
 
 </details>
+
+# ⚡Scanner Issue
+
+<details>
+
+
+
+## ⚡ Problem
+`nextInt()` number ko read karta hai **par newline (`\n`) buffer mein chhod deta hai**.  
+Agar turant `nextLine()` call karo to woh leftover `\n` consume karke **empty string** return karega.
+
+---
+
+## ⚡ Behaviour — Cheat Sheet
+- `nextInt()` → reads number (token), leaves newline.
+- `nextLine()` → reads full line (till `\n`), consumes newline.
+- `next()` → reads only next token (space/newline separated).
+- `nextInt()` → `nextInt()` → ✅ safe.
+- `nextInt()` → `nextLine()` → 🚨 problem (first `nextLine()` becomes `""`).
+
+---
+```java
+int number1 = scn.nextInt();   // yaha user se ek number lega
+scn.nextInt();                 // ek aur number lega
+String name = scn.nextLine();  // string lega
+int number2 = scn.nextInt();   // fir ek aur number lega
+
+// 1 
+// 2
+// 3
+```
+⚡ Scanner ka behavior:     
+
+nextInt() → 1 le liya ✅  
+Buffer mei abhi bhi \n (Enter key) baaki hai.   
+
+Dusra nextInt() → 2 le liya ✅   
+Fir se buffer mei ek \n bacha hai.    
+
+nextLine() → Ye sirf woh bacha hua newline (\n) consume karega 🚨   
+Isliye name empty string ("") ban gaya.   
+
+nextInt() → Ab 3 lega ✅   
+
+
+---
+
+**✅ Best Practice / Fix**  
+
+Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padta hai newline consume karne ke liye.
+
+</details>
