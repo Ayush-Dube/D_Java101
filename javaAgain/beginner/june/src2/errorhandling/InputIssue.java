@@ -1,0 +1,85 @@
+package errorhandling;
+
+import java.util.Scanner;
+
+public class InputIssue {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scn = new Scanner(System.in);
+
+		try {
+
+			System.out.println("enter 2 numbers and a String %n");
+			int number1 = scn.nextInt();
+//			scn.nextInt();
+			scn.nextLine();
+			String name = scn.nextLine();
+			int number2 = scn.nextInt();
+
+			System.out.println("user input- " + number1 + "," + number2);
+			System.out.println("the name is " + name);
+		} catch (Exception e) {
+			System.out.println("some error " + e.getMessage());
+		} 
+		
+//		finally {
+//			scn.close();
+//		}
+//		
+		int choice ;
+		do {
+			System.out.println("Enter ur choice from below options...");
+			System.out.println("1 -  ");
+			System.out.println("2 - ");
+			System.out.println("3 - ");
+			System.out.println("0 - ");
+			choice = scn.nextInt();
+			
+//			switch laga break aur default ke sath 
+			switch(choice) {
+				case 1:
+					System.out.println("you choose "+choice);
+					break;
+				case 2:
+					System.out.println("you choose "+choice);
+					break;
+				case 3:
+					System.out.println("you choose "+choice);
+					break;
+				case 0:
+					System.out.println("you choose "+choice);
+					break;
+				default:
+					System.out.println("Abbe Oy , 1,2,3 aur 0 mei choose kr na...samjh nahi aata kya👿");
+					
+			}
+			
+		} while (choice !=0);
+		
+		
+		scn.close();
+		
+
+	}
+
+}
+
+/*
+ * I think user input val code try catch mei rakhna cahiye ; kyuki User Input
+ * runtime vali cheej hai aur without try-catch crash kr sakti hai user input ki
+ * vah se .
+ * 
+ * Keep the problematic code inside the try-catch block,
+ * 
+ * 		scanner statement
+ * 		int choice
+ * 
+ * 		try{}  --> yanha userInput vaa code rakho 
+ * 
+ * 		do{}--> yanha menu rakho
+ * 		while()-->yanha condition rakhoo
+ * 
+ * 
+ * 
+ */
