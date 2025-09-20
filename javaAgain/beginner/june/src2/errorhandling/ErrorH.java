@@ -26,7 +26,8 @@ import foundation.Student;
  *   - checked/unchecked exceptions
  *   - FileNot found
  *   - throws
- *   - finallyr
+ *   - finally
+ *   - use | for catching multiple Exceptions in hirerachy
  *   
  * 
  * 
