@@ -13,6 +13,7 @@ public class ErrorStack {
 		}
 		catch(Exception e) {
 			System.out.println(e.toString());
+			e.printStackTrace();
 		}	
 		
 
@@ -30,7 +31,7 @@ public class ErrorStack {
 		int[] array = new int[5];
 		array[4] = 55;
 //		System.out.println(array[4]+" "+array[0]+" "+array[2]);
-		System.out.println(Arrays.toString(array));
+//		System.out.println(Arrays.toString(array));
 		System.out.println(array[5]);
 	}
 
@@ -39,7 +40,7 @@ public class ErrorStack {
 /*
  * 	- Pura array ek baar mei kasiey dekhaty hain??
  * 			- Arrays.toString(arr);
- *  - 
+ *  - Catch propagation .
  * 
  * 
  * 

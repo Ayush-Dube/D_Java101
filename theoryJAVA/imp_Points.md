@@ -2810,13 +2810,7 @@ public class NestedDemo {
 <br>
 
 
-# ⚡Exception Handling
 
-<details>
-
-
-
-</details>
 
 # ⚡Scanner Issue
 
@@ -2866,6 +2860,63 @@ nextInt() → Ab 3 lega ✅
 
 **✅ Best Practice / Fix**  
 
-Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padta hai newline consume karne ke liye.
+Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padta hai newline consume karne ke liye. 
 
 </details>
+
+
+# ⚡Exception Handling
+
+<details>
+
+- by default all classes extends Object classes, and therefore have a tostring method().
+        
+        public String toString() {return getClass().getName() + "@" + Integer.toHexString(hashCode());}
+- You can override toString method().
+
+
+
+
+
+
+</details>
+
+# ⚡Wrapper class
+
+1. WrapperClass
+    - **Wrapper classes allow us to treat primitives as objects**.
+    - each primitive has its own wrapper class;
+
+2. Why do we need Wrapper Classes?
+
+    ✅ To work with Collections/Generics (since collections store only objects).  
+    ✅ Provide utility methods (e.g., parsing, conversion).  
+    ✅ Help in type conversion (String → int, int → String).  
+    ✅ Allow null values (primitive can’t hold null, but wrapper can).  
+    ✅ Autoboxing/Unboxing introduced to make life easier.
+
+
+3. code
+```java
+//depriciated
+    Integer a = new Integer(123);
+    Double b = new Double(3.14);
+    Character c = new Character('v');
+    Boolean d = new Boolean(true);
+//modern-way 
+    //Also called the "AUTO-BOXING"
+    Integer a = 123;
+    Double b = 3.14;
+    Character c = '$';
+    Boolean d = false;
+
+    String
+//UN-BOXING
+    //from a object back to primitive
+    int x = Integer.intValue(a); 
+    //or
+    int x1 = a;
+    //both are acheiving same goal
+
+
+```

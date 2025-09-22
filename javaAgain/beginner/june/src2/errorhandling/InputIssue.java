@@ -16,6 +16,7 @@ public class InputIssue {
 			scn.nextLine();
 			String name = scn.nextLine();
 			int number2 = scn.nextInt();
+			scn.nextLine();
 
 			System.out.println("user input- " + number1 + "," + number2);
 			System.out.println("the name is " + name);
