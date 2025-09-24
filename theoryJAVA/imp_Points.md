@@ -2869,6 +2869,7 @@ Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padt
 
 <details>
 
+***One of the complicated/cpmplex topic in java ,I struggled with ***
 - by default all classes extends Object classes, and therefore have a tostring method().
         
         public String toString() {return getClass().getName() + "@" + Integer.toHexString(hashCode());}
@@ -2920,3 +2921,15 @@ Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padt
 
 
 ```
+
+
+# ⚡File operation read/write
+
+<details>
+
+**I thought file handling was complex, until i came across file i/o**
+
+#### So many classes to  do file io in different senarios,at times confusing.
+
+
+</details>
