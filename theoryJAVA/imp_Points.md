@@ -2932,4 +2932,523 @@ Agar tum mix kar rahe ho nextInt() + nextLine(), to extra nextLine() daalna padt
 #### So many classes to  do file io in different senarios,at times confusing.
 
 
+### table
+
+| File Type   | Class                  | Purpose                                   | Key Methods                                                                                           | Creates File?                 | Read? | Write? | Efficient? | Notes / When to Use                                                                      |
+| ----------- | ---------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------- | ----- | ------ | ---------- | ---------------------------------------------------------------------------------------- |
+| Text        | `File`                 | Represent file/dir path & metadata        | `createNewFile()`, `exists()`, `delete()`, `length()`, `getAbsolutePath()`, `canRead()`, `canWrite()` | ✅ (with createNewFile)        | ❌     | ❌      | N/A        | Use for existence check, file info, delete, list directory                               |
+| Text        | `FileWriter`           | Write characters to file                  | `write(String)`, `write(char[])`, `append(String)`, `close()`                                         | ✅ (if file not exist)         | ❌     | ✅      | ❌          | Overwrites by default; use try-with-resources; good for small files                      |
+| Text        | `FileReader`           | Read characters from file                 | `read()`, `read(char[])`, `close()`                                                                   | ❌                             | ✅     | ❌      | ❌          | Reads char-by-char; wrap in BufferedReader for line-by-line                              |
+| Text        | `BufferedWriter`       | Efficient text write                      | `write(String)`, `write(char[])`, `newLine()`, `flush()`, `close()`                                   | ✅ (via underlying FileWriter) | ❌     | ✅      | ✅          | Wraps FileWriter; reduces IO; use for medium/large files                                 |
+| Text        | `BufferedReader`       | Efficient text read                       | `read()`, `read(char[])`, `readLine()`, `close()`                                                     | ❌                             | ✅     | ❌      | ✅          | Wraps FileReader; use for line-by-line reading; better performance than FileReader alone |
+| Text        | `PrintWriter`          | Formatted writing                         | `println()`, `printf()`, `write(String)`, `flush()`, `close()`                                        | ✅ (via FileWriter)            | ❌     | ✅      | ✅          | Convenient for formatted output; auto-flush optional                                     |
+| Text        | `Scanner`              | Parse text (tokens/lines)                 | `nextLine()`, `nextInt()`, `hasNextLine()`, `close()`                                                 | ❌                             | ✅     | ❌      | ✅          | Great for structured text parsing (numbers, strings, tokens)                             |
+| Text        | `Files` (NIO)          | Modern file operations                    | `writeString(Path, String)`, `readString(Path)`, `exists(Path)`, `delete(Path)`, `readAllLines(Path)` | ✅                             | ✅     | ✅      | ✅          | One-liner read/write; supports UTF-8; simple API; small to medium files                  |
+| Binary      | `FileOutputStream`     | Write bytes                               | `write(int)`, `write(byte[])`, `write(byte[], int, int)`, `flush()`, `close()`                        | ✅                             | ❌     | ✅      | ❌          | Use for binary files (images, audio); can append via constructor                         |
+| Binary      | `FileInputStream`      | Read bytes                                | `read()`, `read(byte[])`, `read(byte[], int, int)`, `close()`                                         | ❌                             | ✅     | ❌      | ❌          | Read binary data; wrap in BufferedInputStream for efficiency                             |
+| Binary      | `BufferedOutputStream` | Efficient binary write                    | `write(int)`, `write(byte[])`, `flush()`, `close()`                                                   | ✅ (via FileOutputStream)      | ❌     | ✅      | ✅          | Wraps FileOutputStream; reduces disk IO; use for large files                             |
+| Binary      | `BufferedInputStream`  | Efficient binary read                     | `read()`, `read(byte[])`, `close()`                                                                   | ❌                             | ✅     | ❌      | ✅          | Wraps FileInputStream; use for large binary files                                        |
+| Binary/Text | `DataOutputStream`     | Write primitives (int, double, UTF, etc.) | `writeInt()`, `writeDouble()`, `writeUTF()`, `flush()`, `close()`                                     | ✅ (via underlying stream)     | ❌     | ✅      | ✅          | Can write both text & binary; often wrapped over BufferedOutputStream                    |
+| Binary/Text | `DataInputStream`      | Read primitives                           | `readInt()`, `readDouble()`, `readUTF()`, `close()`                                                   | ❌                             | ✅     | ❌      | ✅          | Often wrapped over BufferedInputStream; reads what DataOutputStream wrote                |
+
+
+### 1.Why even use File
+ Bingo ✅ tumne sahi samjha!  
+Haan, agar tumhe sirf file create + write karna hai, to FileWriter class use karke tumhe File class alag se banane ki zaroorat nahi hai. FileWriter can write in files as well as create a file to write in it if it does not exists.
+
+**But**  
+- Jab File class kaam aati hai
+    - Tumhe File class tab use karni padti hai jab:
+    - Sirf file banana hai bina likhe.
+    - File ke properties check karne hai (size, readable, writable, path, hidden, etc.).
+    - File ke existence check ya multiple files list karne hain.
+    ```java
+    File f = new File("myfile.txt");
+    System.out.println("Absolute path: " + f.getAbsolutePath());
+    System.out.println("Readable? " + f.canRead());
+    System.out.println("File size: " + f.length() + " bytes");
+    ```
+
+🔑 Summary
+
+✅ FileWriter → direct file create + write.
+
+✅ File → metadata + file management operations.
+
+<details>
+
+| Feature / Aspect       | **File** (`java.io.File`)                                                                                           | **FileWriter** (`java.io.FileWriter`)                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Purpose**            | File ya directory ka path represent karta hai                                                                       | File me text data likhne ke liye stream                                                    |
+| **Creates file?**      | Haan, but explicitly via `createNewFile()`                                                                          | Haan, agar file exist nahi karti to bana deta hai                                          |
+| **Can write content?** | ❌ Nahi (sirf existence/info check karta hai)                                                                        | ✅ Haan (string/characters likhta hai)                                                      |
+| **Can read content?**  | ❌ Nahi                                                                                                              | ❌ Nahi (sirf write karne ke liye hai)                                                      |
+| **Use cases**          | - Check if file exists<br>- Get file size, permissions, absolute path<br>- Delete file<br>- List directory contents | - Write data into file (overwrite ya append)<br>- Use with `BufferedWriter` for efficiency |
+| **Close required?**    | ❌ Nahi (resource nahi hai)                                                                                          | ✅ Haan (IO resource hai, best to use try-with-resources)                                   |
+| **Package**            | `java.io.File`                                                                                                      | `java.io.FileWriter`                                                                       |
+| **Relation**           | File = "address of file in filesystem"                                                                              | FileWriter = "pen to write content inside file"                                            |
+
 </details>
+
+### 2. File Writer
+- Jab tum new FileWriter("myfile.txt") likhte ho:  
+- Agar "myfile.txt" file exist nahi karti → FileWriter usko create kar deta hai.  
+- Agar file already exist karti hai → uska purana content overwrite ho jaata hai (jab tak tum `true` flag pass nahi karte append ke liye).
+    ```java
+    import java.io.FileWriter;
+    import java.io.IOException;
+
+    public class WriteFile {
+        public static void main(String[] args) {
+            try (FileWriter writer = new FileWriter("myfile.txt")) { // auto-close
+                writer.write("Hello, this file is created directly with FileWriter!");
+                System.out.println("File written successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    ```
+
+### 3. FileReader
+- FileReader sirf read karne ke liye hai.
+
+- File must exist, otherwise FileNotFoundException aayega.
+
+### 4. BufferWriter/BufferReader(text)
+
+
+`BufferedWriter → wraps FileWriter → writes efficiently in large chunks, reduces disk IO`
+
+`BufferedReader → wraps FileReader → reads line by line or efficiently in chunks`
+
+Key methods:
+
+- BufferedWriter.write(String)
+
+- BufferedWriter.newLine()
+
+- BufferedReader.readLine()
+
+```java
+
+try (BufferedWriter bw = new BufferedWriter(new FileWriter("out.txt"))) {
+    bw.write("Hello World");
+    bw.newLine();
+    bw.write("Second line");
+}
+```
+```java
+
+try (BufferedReader br = new BufferedReader(new FileReader("out.txt"))) {
+    String line;
+    while ((line = br.readLine()) != null) {
+        System.out.println(line);
+    }
+}
+```
+✅ Buffered classes are faster and more convenient for text files than FileReader/FileWriter directly.
+
+## 5. Always use try-with-resources for IO classes (FileReader, FileWriter, BufferedReader/Writer, Scanner)
+
+## 6. Text vs Binary:
+
+- Text → FileWriter, FileReader, BufferedWriter/Reader, PrintWriter, Scanner
+
+- Binary → FileInputStream/OutputStream, BufferedInputStream/OutputStream, DataInput/OutputStream
+
+
+## 7.
+
+1️⃣ Text Files  
+- File  
+- FileWriter  
+- FileReader
+- BufferWriter
+- BufferReader
+- File(nio)
+
+2️⃣ Binary Files    
+- FileInputStream
+- FileOutputStream
+- BufferInputStream
+- BufferOutputStream
+
+## 8.
+ **Mostly you can ignore the unbuffered classes (FileReader, FileWriter, FileInputStream, FileOutputStream)in practice if you always wrap them with buffered classes. But there are some subtle points to be aware of:**
+
+1️⃣ How Buffered Classes Work  
+
+- BufferedReader wraps a Reader (like FileReader)
+
+- BufferedWriter wraps a Writer (like FileWriter)
+
+- BufferedInputStream wraps an InputStream (like FileInputStream)
+
+- BufferedOutputStream wraps an OutputStream (like FileOutputStream)
+
+**So you still need to provide the underlying file stream, e.g.:**
+```java
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+BufferedWriter bw = new BufferedWriter(new FileWriter("file.txt"));
+BufferedInputStream bis = new BufferedInputStream(new FileInputStream("file.bin"));
+BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("file.bin"));
+
+```
+
+2️⃣When You Can Ignore the Unbuffered Classes  
+
+- `If your workflow is always buffered, i.e., you always wrap FileReader/FileWriter or FileInputStream/OutputStream:`
+
+- `You can think of unbuffered classes as just the “base”, not something you use directly.`
+
+- `Buffered classes will take care of efficiency automatically.`
+
+   
+</details>
+
+# ⚡more Wrapper
+
+<details><summary>continued...</summary>
+
+## 1.
+
+- Step 1: What you know about wrapper classes  
+    ```java
+    // Primitive int
+    int x = 5;
+
+    // Wrapper class Integer
+    Integer a = new Integer(x);   // wraps int in an object
+
+    // Convert back to primitive
+    int y = a.intValue();         // unwrap
+
+    ```
+✅ Here, Integer wraps the primitive and gives you extra functionality (like methods, null support, etc.)
+
+
+- Step 2: File IO – Similar concept
+
+    - Unbuffered stream → like primitive (FileReader, FileWriter)
+
+    - Buffered stream → like wrapper (BufferedReader, BufferedWriter)
+
+    ```java
+        // Unbuffered: basic primitive-level IO
+    FileReader fr = new FileReader("file.txt");
+
+    // Buffered: wraps fr for efficiency, like Integer wraps int
+    BufferedReader br = new BufferedReader(fr);
+
+    // Now br gives extra “methods” like readLine(), better performance
+    String line = br.readLine();
+
+    ```
+    `Instead of doing it in two steps:`
+    ```java
+    FileReader fr = new FileReader("file.txt");         // Step 1: create unbuffered
+    BufferedReader br = new BufferedReader(fr);         // Step 2: wrap it
+    ```
+    You can directly pass the new object as a parameter:
+    ```java
+    BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+    ```
+
+    ✅ This works perfectly. Java evaluates the new FileReader("file.txt") first, then passes it to the BufferedReader constructor.
+
+    - Think of it like passing an int to Integer constructor directly:
+    ```java
+    Integer a = new Integer(5);    // wraps 5 directly, no need for int x first
+    ```
+
+## 2. 
+
+1. Primitive → Wrapper (boxing)
+
+2. Wrapper → Primitive (unboxing)
+
+**Java Wrapper Class Demo – Concept Clearing**
+```java
+public class WrapperDemo {
+
+    public static void main(String[] args) {
+
+        // -------------------------------
+        // 1️⃣ Primitive → Wrapper (Boxing)
+        // -------------------------------
+        int num = 42;                       // primitive int
+        Integer wrappedNum = Integer.valueOf(num); // explicit boxing
+        System.out.println("Wrapped value: " + wrappedNum);
+
+        // -------------------------------
+        // 2️⃣ Wrapper → Primitive (Unboxing)
+        // -------------------------------
+        int unboxed = wrappedNum.intValue(); // explicit unboxing
+        System.out.println("Unboxed value: " + unboxed);
+
+        // -------------------------------
+        // 3️⃣ Auto-boxing / Auto-unboxing
+        // -------------------------------
+        Integer autoBoxed = num;            // primitive automatically wrapped
+        int autoUnboxed = autoBoxed;        // wrapper automatically converted to primitive
+        System.out.println("Auto-boxed value: " + autoBoxed);
+        System.out.println("Auto-unboxed value: " + autoUnboxed);
+
+        // -------------------------------
+        // 4️⃣ Practical Example: Collection
+        // -------------------------------
+        java.util.ArrayList<Integer> list = new java.util.ArrayList<>();
+        
+        // Cannot store primitives directly in ArrayList
+        // list.add(num); // Works because auto-boxing converts int → Integer
+
+        list.add(num);                       // auto-boxed
+        list.add(99);                        // auto-boxed
+        System.out.println("ArrayList content: " + list);
+
+        // Extract back as primitive
+        int firstElement = list.get(0);      // auto-unboxed
+        System.out.println("First element as int: " + firstElement);
+
+        // -------------------------------
+        // 5️⃣ Wrapper utility methods
+        // -------------------------------
+        String str = "12345";
+        int parsedInt = Integer.parseInt(str);  // convert String → int
+        System.out.println("Parsed int from String: " + parsedInt);
+
+        boolean parsedBool = Boolean.parseBoolean("true"); // String → boolean
+        System.out.println("Parsed boolean: " + parsedBool);
+
+        double parsedDouble = Double.parseDouble("3.1415");
+        System.out.println("Parsed double: " + parsedDouble);
+    }
+}
+
+/*
+key point 
+Integer ke class hai jiske ander valueof() method hai jo ki ek int value as param lyta 
+here this param was num, but it could have been  any number direclty aslo 
+Integer x = Interger.valueof(5);
+*/
+
+```
+✅ What This Demo Shows  
+
+1. Explicit Boxing / Unboxing
+```
+Integer wrappedNum = Integer.valueOf(num);
+int unboxed = wrappedNum.intValue();
+```
+
+2. Auto-boxing / Auto-unboxing
+Java automatically wraps and unwraps primitives when needed, especially in collections.
+
+3. Practical Use Case
+
+    - You cannot store primitives directly in collections like ArrayList.
+
+    - Wrappers let you store primitives as objects.
+
+    - Retrieval automatically converts back to primitive if needed.
+
+4. Utility Methods
+
+- Parse Strings to primitive types: Integer.parseInt(), Double.parseDouble(), Boolean.parseBoolean().
+
+- Very handy for input handling or reading data from files.
+
+5. 
+```java
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+
+//FileReader → primitive (basic)
+//BufferedReader → wrapper (enhanced + efficient)
+```
+# 3. 
+### 1️⃣ int vs Integer – The Basics
+| Feature       | `int`                                                      | `Integer`                                           |
+| ------------- | ---------------------------------------------------------- | --------------------------------------------------- |
+| Type          | Primitive                                                  | Class (Wrapper for int)                             |
+| Memory        | Stores value directly(stack)                                      | Stores object reference (on heap)                   |
+| Nullability   | Cannot be null                                             | Can be null                                         |
+| Methods       | None                                                       | Many utility methods (parse, compare, etc.)         |
+| Collections   | Cannot be stored in collections (ArrayList, HashMap, etc.) | Can be stored in collections because it’s an object |
+| Example usage | `int x = 5;`                                               | `Integer y = 5;` (auto-boxed)                       |
+|-|faster|relativley slower|
+
+### extra wrapper feauters
+| Method / Feature                | What it does                                  |
+| ------------------------------- | --------------------------------------------- |
+| `Integer.parseInt(String)`      | Convert string → int                          |
+| `Integer.valueOf(String)`       | Convert string → Integer object               |
+| `Integer.toString(int)`         | Convert int → String                          |
+| `Integer.compare(int a, int b)` | Compare two ints                              |
+| `Integer.MAX_VALUE / MIN_VALUE` | Max and Min value int can store               |
+| `Integer.toBinaryString(int)`   | Convert int → binary string                   |
+| `Integer.toHexString(int)`      | Convert int → hex string                      |
+| `Integer.hashCode()`            | Returns hashcode of int (useful in maps/sets) |
+
+### more
+| Feature              | `int` (primitive)             | `Integer` (wrapper class)                      |
+| -------------------- | ----------------------------- | ---------------------------------------------- |
+| Storage              | Stack (value stored directly) | Heap (object reference stored)                 |
+| Speed                | Faster (primitive)            | Slightly slower (object overhead)              |
+| Functionality        | Basic arithmetic only         | Many utility methods + object features         |
+| Null support         | ❌ Cannot be null              | ✅ Can be null                                  |
+| Collections          | ❌ Cannot be used in generics  | ✅ Can be used in generics (ArrayList, HashMap) |
+| Auto-boxing/unboxing | ❌ Not applicable              | ✅ Converts to/from int automatically           |
+
+---
+
+![alt text](image-24.png)
+
+---
+
+```java
+Integer i = new Integer(11);  // Works, but **deprecated**
+```
+
+## 4. 
+### 1️⃣ What a Wrapper Class Really Does  
+
+- Wraps a primitive type in an object, so it can be treated like any other object.
+
+- Provides extra features / methods that the primitive does not have.
+
+- Enables usage in collections, generics, and APIs that require objects.
+
+- Supports null values, which primitives cannot.
+
+### 2️⃣ So yes, in simple words…
+
+- Primitive → “bare number” → limited functionality
+
+- Wrapper → “smart object around that number” → enhanced functionality
+
+### 3️⃣ Static methods vs instance (object) methods
+
+- Integer.parseInt("123") → static method
+
+    - Can be called without creating an Integer object
+
+    - Works directly on String → int conversion
+
+- Integer.valueOf(5) → static method
+
+    - Returns an Integer object from a primitive int
+
+✅ Static methods are part of the class, not the object. So you don’t need a wrapper object to call them.
+
+---
+
+### 4️⃣ What the Integer object actually gives you
+
+Once you have an Integer object, you can do things with the object itself:
+```java
+int x = 5;          // primitive
+Integer y = 7;      // wrapper object
+
+System.out.println(y.equals(7));       // ✅ true, works on object
+System.out.println(y.compareTo(10));   // ✅ compares to another Integer
+System.out.println(y.toString());      // ✅ converts this object to String
+```
+- These instance methods cannot be called on primitive int because it’s not an object.
+
+- ***`int has no methods at all`***.
+
+| Feature          | Primitive int                | Integer object                                          |
+| ---------------- | ---------------------------- | ------------------------------------------------------- |
+| Null value       | ❌ cannot be null             | ✅ can be null                                           |
+| Collections      | ❌ cannot be used in generics | ✅ can store in `ArrayList<Integer>` etc.                |
+| Instance methods | ❌ none                       | ✅ `compareTo()`, `equals()`, `toString()`, `hashCode()` |
+| Object identity  | ❌ no reference               | ✅ can use `==` for reference, `equals()` for value      |
+| Polymorphism     | ❌ cannot be passed as Object | ✅ can be passed to methods expecting Object             |
+
+
+
+## 5.
+Perfect 👌 now we’re at the core conversion part — how to go back and forth between int and Integer. Let’s do both autoboxing/unboxing and explicit methods.   
+
+### 1️⃣ int → Integer (Boxing)  
+✅ Autoboxing (automatic)  
+```java
+int x = 5;
+Integer y = x;   // compiler does Integer.valueOf(x) internally
+System.out.println(y);  // 5
+
+✅ Explicit
+```java
+int x = 5;
+Integer y = Integer.valueOf(x);  // preferred explicit way
+System.out.println(y);  // 5
+```
+
+### 2️⃣ Integer → int (Unboxing)
+✅ Auto-unboxing (automatic)  
+```java
+Integer z = 10;
+int a = z;   // compiler does z.intValue() internally
+System.out.println(a);  // 10
+```
+✅ Explicit   
+```java
+Integer z = 10;
+int a = z.intValue();   // manually unbox
+System.out.println(a);  // 10
+```
+
+### 3️⃣ Full Demo
+
+```java
+public class WrapperDemo {
+    public static void main(String[] args) {
+        // int → Integer
+        int x = 5;
+
+        Integer y1 = x;                   // Autoboxing
+        Integer y2 = Integer.valueOf(x);  // Explicit
+
+        System.out.println("y1: " + y1);
+        System.out.println("y2: " + y2);
+
+        // Integer → int
+        Integer z = 20;
+
+        int a1 = z;              // Auto-unboxing
+        int a2 = z.intValue();   // Explicit
+
+        System.out.println("a1: " + a1);
+        System.out.println("a2: " + a2);
+    }
+}
+```
+
+✅ Summary 
+| Conversion    | Autoboxing/Unboxing | Explicit                          |
+| ------------- | ------------------- | --------------------------------- |
+| int → Integer | `Integer y = x;`    | `Integer y = Integer.valueOf(x);` |
+| Integer → int | `int a = z;`        | `int a = z.intValue();`           |
+
+
+```java
+	//little wrapper demo
+    int x = 5;
+    System.out.println(x);
+    
+    Integer z = 7;
+    //observe that there are several functions provided when u do (z.), but u cant do that with primitive x 
+    System.out.println(z.toString()+7);
+    System.out.println(z.intValue()+7);
+
+    // you can change the z into a textNumber, but u cant do that to x. 
+    //Therfore Wrapper is required.
+
+```
+</details>
+
+
+
+# ⚡Next

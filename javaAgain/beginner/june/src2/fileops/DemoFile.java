@@ -13,9 +13,25 @@ public class DemoFile {
 
 			if (f.createNewFile()) {
 				System.out.println("File created: " + f.getName());
+				
+				
+				
+				
 			} else {
 				System.out.println("File already exists.");
 			}
+			
+			
+			System.out.println("----------");
+			
+			//little wrapper demo
+			int x = 5;
+			System.out.println(x);
+			
+			Integer z = 7;
+			//observe that there are several functions provided when u do (z.), but u cant do that with primitive x 
+			System.out.println(z.toString()+7);
+			System.out.println(z.intValue()+7);
 
 		} catch (IOException i) {
 			System.out.println(i.toString());
