@@ -3108,6 +3108,17 @@ BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("file.b
    
 </details>
 
+<details><summary>part2</summary>
+
+## Understand Bit-->byte
+
+
+
+</details>
+
+
+---
+
 # ⚡more Wrapper
 
 <details><summary>continued...</summary>
